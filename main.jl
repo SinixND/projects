@@ -1,3 +1,11 @@
+#debugger
+function dbg(dbg_bp,args...)
+	println("### STRT DBG BP # \"", dbg_bp, "\" ###")
+	println(args)
+	println("### FNSH DBG BP # \"", dbg_bp, "\" ###")
+	readline()
+end
+
 #get_settings
 #include("settings.jl")
 
@@ -71,7 +79,8 @@ end
 #check_board
 function check_board()
     for n in 1:bsize_n, m in 1:bsize_m
-        check_neighbours(n,m)
+	    dbg("check_board", n, m)
+		check_neighbours(n,m)
         if board[n,m].cnt_nghbr == 2
             #donothing
         elseif board[n,m].cnt_nghbr == 3
