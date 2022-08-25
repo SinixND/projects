@@ -180,3 +180,6 @@ for tick in 1:ltime
     sleep(stime)
 	#readline()
 end
+
+#=
+
