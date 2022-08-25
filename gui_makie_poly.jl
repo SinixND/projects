@@ -12,3 +12,6 @@ poly!(
 )
 
 f
+
+save("figure.png", f)
+
