@@ -1,3 +1,12 @@
+using Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+
+using QML
+using Qt5QuickControls_jll
+using Qt5QuickControls2_jll
+using Observables
+
 #debugger
 function dbg(dbg_bp, args...)
 	println("### STRT DBG BP # \"", dbg_bp, "\" ###")
@@ -17,7 +26,7 @@ bsr = 30 #boardsize rows
 bsc = 12 #boardsize columns
 ldens = .5 #life density as decimal (< 1)
 ltime = 100 #lifetime in ticks
-stime = 0.1 #sleeptime (+executiontime == lifetime)
+stime = 0.05 #sleeptime (+executiontime == lifetime)
 
 #make_type_cell
 mutable struct Cell
@@ -154,6 +163,18 @@ function update_cells(bsr, bsc, board)
     end
 end
 
+global file_gui_window = "gui_window.qml"
+global file_gui_cell = "gui_cell.qml"
+#make gui
+function gui_window(bsr, bsc)
+    loadqml(file_gui_window, bsr=bsr, bsc=bsc)
+    exec() # run from REPL for async execution
+end
+function gui_cell(bsr, bsc)
+    loadqml(file_gui_cell, bsr=bsr, bsc=bsc)
+    exec()
+end
+
 #main
 board = initialize_board(bsr, bsc)
 
@@ -161,6 +182,14 @@ populate_board(bsr, bsc, ldens, board)
 
 visualizer = initialize_visualizer(bsr, bsc)
 
+gui_window(bsr, bsc)
+for i in 1:3, j in 1:3
+    gui_cell(bsr, bsc)
+end
+
+exit()
+
+#=
 run(`clear`);
 println("Day 0")
 refresh_visualizer(bsr, bsc, board, visualizer)
@@ -176,10 +205,12 @@ for tick in 1:ltime
     update_cells(bsr, bsc, board)
     #update and show visualizer matrix
     refresh_visualizer(bsr, bsc, board, visualizer)
+    #call qml gui
+    #gui()
     #stop for stime to "see" simulation
     sleep(stime)
 	#readline()
 end
 
-#=
+exit()
 
