@@ -4,13 +4,13 @@ using Pkg
 Pkg.activate(".")
 Pkg.instantiate()
 
-using Agents, AgentsPlots
+using Agents#, InteractiveDynamics, CairoMakie
 
 #= INPUT =#
 
 #include("settings.jl")
-bsc = 12 #boardsize columns
 bsr = 30 #boardsize rows
+bsc = 12 #boardsize columns
 ldens = .66 #life density as decimal (< 1)
 ltime = 100 #lifetime in ticks
 fps = 1 #frames per second
@@ -33,61 +33,67 @@ end
 #= MAIN =#
 
 #make agent
-mutable struct Cell <: AbstractAgent
+#=
+mutable struct agent <: AbstractAgent
 	id::Int
 	pos::Dims{2}
     status::Bool
 end
-
-#make space
-dims = (bsc, bsr)
-Void = GridSpace(dims; periodic = true, moore = true)
-
-#define properties: D(eath), R(eproduce), O(verpopulated)
-Rules = Dict(:D => 1, :R => 3, :O => 4)
-
-#make model
-CGoL = ABM(Cell, Void; Rules)
-
-#define step
-function model_step!(Cell, CGoL)
-	caca::Int8 = 0 #count_adjacent_cells_alive
-	for ac in nearby_agents(Cell, CGoL)
-		if ac.status == true
-			caca += 1
-		end
-	end
-	if caca <= :D || caca >= :O
-		Cell.status = false
-	elseif caca == :R
-		Cell.status = true
-	end
+=#
+@agent agent GridAgent{2} begin
+    status::Bool
 end
 
+#make space
+dims = (bsr, bsc)
+space = GridSpace(dims; periodic = true, metric = :chebyshev)
+
+#define rules: D(eath), R(eproduce), O(verpopulated)
+rules = Dict(:D => 1, :R => 3, :O => 4)
+
+#make model
+model = ABM(agent, space)
+
 #populate space
-function fill_void(Cell, CGoL, ldens)
+function fill_void(agent, model, ldens)
 	#agent id
 	idn = 1 
 	for x in 1:dims[1], y in 1:dims[2]
 		#implement_life_density
 		if rand(0:.0001:1) <= ldens 
-			add_agent_pos!(Cell(idn, (x, y), true), CGoL)
+			add_agent_pos!(agent(idn, (x, y), true), model)
 		else
-			add_agent_pos!(Cell(idn, (x, y), false), CGoL)
+			add_agent_pos!(agent(idn, (x, y), false), model)
 		end
         idn += 1
 	end
 end
 
-step!(CGoL, model_step!,ltime)
-
-#=
-#define color (ac) depending on status
-ac(x) = x.status == true ? :black : :white
-anim = @animate for i in 0:ltime
-    i > 0 && step!(CGoL, dummystep, model_step!, 1)
-	#as (size) dynamicly?
-    p1 = plotabm(CGoL; ac = ac, as = 3, am = :square, showaxis = false)
+#define step
+function model_step!(agent, model)
+	caca::Int8 = 0 #count_adjacent_cells_alive
+	for ac in nearby_agents(agent, model)
+		if ac.status == true
+			caca += 1
+		end
+	end
+    if caca <= rules[:D] || caca >= rules[:O]
+		agent.status = false
+	elseif caca == :R
+		agent.status = true
+	end
 end
 
-gif(anim, "game_of_life.gif", fps = 5)
+step!(model, model_step!,ltime)
+#=
+color(a) = a.status == true ? :white : :black
+marker(a) = :rect
+
+abmvideo(
+    "schelling.mp4", model, agent_step!;
+    ac = color, am = marker, as = 3,
+    framer = 4, frames = 20,
+    title = "Schelling's segregation model"
+)
+=#
+
