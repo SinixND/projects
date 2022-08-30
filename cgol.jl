@@ -2,11 +2,6 @@ using Pkg
 Pkg.activate(".")
 Pkg.instantiate()
 
-using QML
-using Qt5QuickControls_jll
-using Qt5QuickControls2_jll
-using Observables
-
 #debugger
 function dbg(dbg_bp, args...)
 	println("### STRT DBG BP # \"", dbg_bp, "\" ###")
@@ -163,18 +158,6 @@ function update_cells(bsr, bsc, board)
     end
 end
 
-global file_gui_window = "gui_window.qml"
-global file_gui_cell = "gui_cell.qml"
-#make gui
-function gui_window(bsr, bsc)
-    loadqml(file_gui_window, bsr=bsr, bsc=bsc)
-    exec() # run from REPL for async execution
-end
-function gui_cell(bsr, bsc)
-    loadqml(file_gui_cell, bsr=bsr, bsc=bsc)
-    exec()
-end
-
 #main
 board = initialize_board(bsr, bsc)
 
@@ -182,14 +165,6 @@ populate_board(bsr, bsc, ldens, board)
 
 visualizer = initialize_visualizer(bsr, bsc)
 
-gui_window(bsr, bsc)
-for i in 1:3, j in 1:3
-    gui_cell(bsr, bsc)
-end
-
-exit()
-
-#=
 run(`clear`);
 println("Day 0")
 refresh_visualizer(bsr, bsc, board, visualizer)
@@ -199,14 +174,12 @@ sleep(stime)
 for tick in 1:ltime
 	run(`clear`);
 	println("Day ", tick)
-    #check cells < check neighbours < check nghbr-status |> set cells evo
+    #check cells |> check neighbours |> check nghbr-status |> set cells evo
     check_board(bsr, bsc, board)
     #set cells status according to evo
     update_cells(bsr, bsc, board)
     #update and show visualizer matrix
     refresh_visualizer(bsr, bsc, board, visualizer)
-    #call qml gui
-    #gui()
     #stop for stime to "see" simulation
     sleep(stime)
 	#readline()
