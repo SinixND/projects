@@ -21,7 +21,7 @@ bsr = 30 #boardsize rows
 bsc = 12 #boardsize columns
 ldens = .5 #life density as decimal (< 1)
 ltime = 100 #lifetime in ticks
-stime = 0.05 #sleeptime (+executiontime == lifetime)
+fps = 1 #frames per second
 
 #make_type_cell
 mutable struct Cell
@@ -168,7 +168,7 @@ visualizer = initialize_visualizer(bsr, bsc)
 run(`clear`);
 println("Day 0")
 refresh_visualizer(bsr, bsc, board, visualizer)
-sleep(stime)
+sleep(1/fps)
 
 #start simulation
 for tick in 1:ltime
@@ -180,8 +180,8 @@ for tick in 1:ltime
     update_cells(bsr, bsc, board)
     #update and show visualizer matrix
     refresh_visualizer(bsr, bsc, board, visualizer)
-    #stop for stime to "see" simulation
-    sleep(stime)
+    #stop for 1/fps to "see" simulation
+    sleep(1/fps)
 	#readline()
 end
 
