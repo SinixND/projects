@@ -1,16 +1,3 @@
-for n in rows, m in cols
-	if board[n,m].status == true
-		draw Rectangle{
-			width: floor(window.width/cols)
-			height: floor(window.height/rows)
-			posx: m*width-width
-			posy: n*height-height
-			alpha: dependent of state?
-
-
-save("figure.png", f)
-
- 
 using ElectronDisplay
 ElectronDisplay.CONFIG.single_window = true
 
@@ -38,6 +25,4 @@ anim = @animate for i in 1:n
 end
 
 gif(anim, "animation.gif", fps = 15)
-
-
 
