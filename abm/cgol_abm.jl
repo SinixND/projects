@@ -4,7 +4,7 @@ using Pkg
 Pkg.activate(".")
 Pkg.instantiate()
 
-using Agents#, InteractiveDynamics, CairoMakie
+using Agents
 
 #= INPUT =#
 
@@ -70,7 +70,7 @@ function fill_void(agent, model, ldens)
 end
 
 #define step
-function model_step!(agent, model)
+function agent_step!(agent, model)
 	caca::Int8 = 0 #count_adjacent_cells_alive
 	for ac in nearby_agents(agent, model)
 		if ac.status == true
@@ -84,16 +84,26 @@ function model_step!(agent, model)
 	end
 end
 
-step!(model, model_step!,ltime)
-#=
-color(a) = a.status == true ? :white : :black
-marker(a) = :rect
+step!(model, agent_step!,ltime)
 
-abmvideo(
-    "schelling.mp4", model, agent_step!;
-    ac = color, am = marker, as = 3,
-    framer = 4, frames = 20,
-    title = "Schelling's segregation model"
-)
+#=
+
+using InteractiveDynamics 
+using CairoMakie
+CairoMakie.activate!()
+  
+groupcolor(a) = a.status == true ? :white : :black 
+groupmarker(a) = :rect 
+figure, _ = abmplot(model; ac = groupcolor, am = groupmarker, as = 10) 
+figure # returning the figure displays it 
+ 
+model = initialize(); 
+abmvideo( 
+     "game_of_life.mp4", model, agent_step!; 
+     ac = groupcolor, am = groupmarker, as = 10, 
+     framerate = 4, frames = 20, 
+     title = "Conways Game of Life" 
+ ) 
+
 =#
 
