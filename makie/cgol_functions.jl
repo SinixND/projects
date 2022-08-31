@@ -1,9 +1,3 @@
-using Pkg
-Pkg.activate(".")
-Pkg.instantiate()
-
-using GLMakie
-
 #debugger
 function dbg(dbg_bp, args...)
 	println("### STRT DBG BP # \"", dbg_bp, "\" ###")
@@ -17,31 +11,9 @@ function vbs(msg::String)
     println("MSG: \"", msg, "\"")
 end
 
-#get_settings
-bsr = 30 #boardsize rows
-bsc = 12 #boardsize columns
-ldens = .5 #life density as decimal (< 1)
-ltime = 100 #lifetime in ticks
-fps = 1 #frames per second
-
-#make_type_cell
-mutable struct Cell
-    status::Bool
-    cnt_nghbr::Int8
-    evo::Bool
-end
-
-#initialize_board
-function initialize_board(bsr, bsc)::Array
-    #vbs("initialize_board")
-    #make_board
-    board = Array{Cell}(undef, bsr, bsc)
-    return board
-end
-
 #populate_board
-function populate_board(bsr, bsc, ldens, board)
-    for n in 1:bsr, m in 1:bsc
+function populate_board(board, ldens)
+    for n in 1:size(board)[1], m in 1:size(board)[2]
         #implement_life_density
         if rand(0:.0001:1) <= ldens 
             board[n, m] = Cell(true, 0, false)
@@ -101,17 +73,14 @@ function refresh_visualizer(bsr, bsc, board, visualizer)
 end
 
 #initialize_plot
-function initialize_plot(bsr, bsc)::Array
-    #vbs("initialize_plot")
-    #make_plot
-    plot = Array{Char}(undef, bsr, bsc)
+function initialize_plot()
     return plot
 end
 
-#refresh_plot
-function refresh_plot(bsr, bsc, board, plot)
-    #vbs("refresh_plot")
-    for n in 1:bsr, m in 1:bsc
+#board_step!
+function board_step!()
+    #vbs("board_step!")
+    for n in 1:size(board)[1], m in 1:bsc
         if board[n, m].status == true
             plot[n, m] = 'X' 
         else
@@ -121,28 +90,28 @@ function refresh_plot(bsr, bsc, board, plot)
     show(stdout, "text/plain", plot)
 end
 
-#check_values
-function check_values(x, limit)
-    #vbs("check_values")
-    if x == 0
+#check_valid_neighbours
+function check_valid_neighbours(n, limit)
+    #vbs("check_valid_neighbours")
+    if n == 0
        return limit
-   elseif x == limit + 1
+   elseif n == limit + 1
        return 1
    else
-       return x
+       return n
    end
 end
    
-#check_neighbours
-function check_neighbours(n, m, board, bsr, bsc)
-    #vbs("check_neighbours")
+#count_alive_neighbours
+function count_alive_neighbours(n, m, board)
+    #vbs("count_alive_neighbours")
     board[n, m].cnt_nghbr = 0
     for dn in [-1, 0, 1], dm in [-1, 0, 1]
         if dn == 0 && dm == 0
             #donothing
         else
 			#dbg("old cnt_nghbr", board[n, m].cnt_nghbr)
-			if board[check_values(n+dn, bsr), check_values(m+dm, bsc)].status == true
+            if board[check_valid_neighbours(n+dn, size(board)[1]), check_valid_neighbours(m+dm, size(board)[2])].status == true
 				board[n, m].cnt_nghbr = board[n, m].cnt_nghbr+1 
 				#dbg("new cnt_nghbr", board[n, m].cnt_nghbr)
 			else
@@ -154,15 +123,15 @@ function check_neighbours(n, m, board, bsr, bsc)
 end
 
 #check_board
-function check_board(bsr, bsc, board)
+function check_board(board)
     #vbs("check_board")
-    for n in 1:bsr, m in 1:bsc
-		check_neighbours(n, m, board, bsr, bsc)
+    for n in 1:size(board)[1], m in 1:size(board)[2]
+        count_alive_neighbours(n, m, board, size(board)[1], size(board)[2])
         #dbg("board[n, m].cnt_nghbr", n, m, board[n, m].cnt_nghbr)
         if board[n, m].cnt_nghbr == 2
-            board[n,m].evo = board[n,m].status
+            board[n, m].evo = board[n, m].status
         elseif board[n, m].cnt_nghbr == 3
-            board[n,m].evo = true
+            board[n, m].evo = true
         else
             board[n, m].evo = false
         end
@@ -172,43 +141,10 @@ function check_board(bsr, bsc, board)
 end
 
 #update_cells
-function update_cells(bsr, bsc, board)
+function update_cells(board)
     #vbs("update_cells")
-    for n in 1:bsr, m in 1:bsc
+    for n in 1:size(board)[1], m in 1:size(board)[2]
         board[n, m].status = board[n, m].evo
     end
 end
-
-#main
-board = initialize_board(bsr, bsc)
-
-populate_board(bsr, bsc, ldens, board)
-
-#visualizer = initialize_visualizer(bsr, bsc)
-plot = initialize_plot(bsr, bsc)
-
-run(`clear`);
-println("Day 0")
-#refresh_visualizer(bsr, bsc, board, visualizer)
-refresh_plot(bsr, bsc, board, plot)
-sleep(1/fps)
-
-#start simulation
-for tick in 1:ltime
-	run(`clear`);
-	println("Day ", tick)
-    #check cells |> check neighbours |> check nghbr-status |> set cells evo
-    check_board(bsr, bsc, board)
-    #set cells status according to evo
-    update_cells(bsr, bsc, board)
-    ##update and show visualizer matrix
-    #refresh_visualizer(bsr, bsc, board, visualizer)
-    #update and show plot
-    refresh_plot(bsr, bsc, board, plot)
-    #stop for 1/fps to "see" simulation
-    sleep(1/fps)
-	#readline()
-end
-
-exit()
 
