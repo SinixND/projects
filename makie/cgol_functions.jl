@@ -73,21 +73,10 @@ function refresh_visualizer(bsr, bsc, board, visualizer)
 end
 
 #initialize_plot
-function initialize_plot()
+function initialize_plot(board)
+	screen_resolution = Makie.primary_resolution()
+	plot = Figure(resolution = (/board(size)[1],/board(size)[2]),figure_padding = 1, backgroundcolor = :black);
     return plot
-end
-
-#board_step!
-function board_step!()
-    #vbs("board_step!")
-    for n in 1:size(board)[1], m in 1:bsc
-        if board[n, m].status == true
-            plot[n, m] = 'X' 
-        else
-            plot[n, m] = ' '
-        end
-    end
-    show(stdout, "text/plain", plot)
 end
 
 #check_valid_neighbours
@@ -146,5 +135,18 @@ function update_cells(board)
     for n in 1:size(board)[1], m in 1:size(board)[2]
         board[n, m].status = board[n, m].evo
     end
+end
+
+#plot_element
+function plot_element!(board, plot)
+    #vbs("plot_element!")
+    for n in 1:size(board)[1], m in 1:size(board)[2]
+        if board[n, m].status == true
+            plot[n, m] = 'X' 
+        else
+            plot[n, m] = ' '
+        end
+    end
+    show(stdout, "text/plain", plot)
 end
 
