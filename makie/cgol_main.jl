@@ -10,15 +10,6 @@ ldens = .5 #life density as decimal (< 1)
 ltime = 100 #lifetime in ticks
 fps = 1 #frames per second
 
-sx::Int = screenresolution[1]
-sy::Int = screenresolution[2]
-fx::Int = floor(screenresolution[1]*.75)
-fy::Int = floor(screenresolution[2]*.75)
-cx::Int = floor(floor(screenresolution[1]*.75)
-/board(size)[2])
-cy::Int = floor(floor(screenresolution[2]*.75)
-/board(size)[1])
-
 #DEBUGGER
 function dbg(dbg_bp, args...)
 	println("### STRT DBG BP # \"", dbg_bp, "\" ###")
@@ -96,7 +87,8 @@ end
 #initialize_plot
 function initialize_plot(board)
 	screen_resolution = Makie.primary_resolution()
-	plot = Figure(resolution = (floor(screenresolution[1]*.75), floor(screenresolution[2]*.75)), backgroundcolor = :black);
+	plot = Figure(resolution = (floor(screen_resolution[1]*.75), floor(screen_resolution[2]*.75)), backgroundcolor = :black);
+    Axis(plot[size(board)[2], size(board)[1]])
     return plot
 end
 
@@ -136,7 +128,7 @@ end
 function check_board(board)
     #vbs("check_board")
     for n in 1:size(board)[1], m in 1:size(board)[2]
-        count_alive_neighbours(n, m, board, size(board)[1], size(board)[2])
+        count_alive_neighbours(n, m, board)
         #dbg("board[n, m].cnt_nghbr", n, m, board[n, m].cnt_nghbr)
         if board[n, m].cnt_nghbr == 2
             board[n, m].evo = board[n, m].status
@@ -161,11 +153,12 @@ end
 #plot_elements (make plot array?)
 function plot_elements!(board, plot)
     #vbs("plot_elements!")
+	screen_resolution = Makie.primary_resolution()
     for n in 1:size(board)[1], m in 1:size(board)[2]
         if board[n, m].status == true
-            scatter!(m, n, marker = :rect, markersize = floor(floor(screenresolution[1]*.75)/board(size)[2]), color = :white)
+            scatter!((m, n), marker = :rect, markersize = floor(floor(screen_resolution[1]*.75)/size(board)[2]), color = :white)
         else
-			scatter!(m, n, marker = :rect, markersize = floor(/board(size)[1]), color = :black)
+            scatter!((m, n), marker = :rect, markersize = floor(floor(screen_resolution[1]*.75)/size(board)[1]), color = :black)
         end
     end
 end
