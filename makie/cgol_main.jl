@@ -179,6 +179,7 @@ board = Array{Cell}(undef, bsr, bsc)
 
 initialize_visualizer(board)
 initialize_plot(board)
+plot
 
 populate_board(board, ldens)
 plot_elements!(board, plot);
