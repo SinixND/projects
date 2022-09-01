@@ -1,6 +1,3 @@
-include("cgol_settings.jl")
-include("cgol_functions.jl")
-
 using Pkg
 Pkg.activate(".")
 Pkg.instantiate()
@@ -12,6 +9,15 @@ bsc = 12 #boardsize columns
 ldens = .5 #life density as decimal (< 1)
 ltime = 100 #lifetime in ticks
 fps = 1 #frames per second
+
+sx::Int = screenresolution[1]
+sy::Int = screenresolution[2]
+fx::Int = floor(screenresolution[1]*.75)
+fy::Int = floor(screenresolution[2]*.75)
+cx::Int = floor(floor(screenresolution[1]*.75)
+/board(size)[2])
+cy::Int = floor(floor(screenresolution[2]*.75)
+/board(size)[1])
 
 #DEBUGGER
 function dbg(dbg_bp, args...)
@@ -26,17 +32,6 @@ function vbs(msg::String)
     println("MSG: \"", msg, "\"")
 end
 
-#make_type_cell
-mutable struct Cell
-    status::Bool
-    cnt_nghbr::Int8
-    evo::Bool
-end
-
-#initialize_board
-#vbs("initialize_board")
-board = Array{Cell}(undef, bsr, bsc)
-
 #populate_board
 function populate_board(board, ldens)
     for n in 1:size(board)[1], m in 1:size(board)[2]
@@ -50,8 +45,8 @@ function populate_board(board, ldens)
 end
 
 #dev_populate_board
-function dev_populate_board(bsr, bsc, ldens, board)
-    for n in 1:bsr, m in 1:bsc
+function dev_populate_board(board, ldens)
+    for n in 1:size(board)[1], m in 1:size(board)[2]
 		board[n, m] = Cell(false, 0, false)
     end
 	#middles
@@ -78,17 +73,17 @@ function dev_populate_board(bsr, bsc, ldens, board)
 end
 
 #initialize_visualizer
-function initialize_visualizer(bsr, bsc)::Array
+function initialize_visualizer(board)::Array
     #vbs("initialize_visualizer")
     #make_visualizer
-    visualizer = Array{Char}(undef, bsr, bsc)
+    visualizer = Array{Char}(undef, size(board)[1], size(board)[2])
     return visualizer
 end
 
 #refresh_visualizer
-function refresh_visualizer(bsr, bsc, board, visualizer)
+function refresh_visualizer(board, visualizer)
     #vbs("refresh_visualizer")
-    for n in 1:bsr, m in 1:bsc
+    for n in 1:size(board)[1], m in 1:size(board)[2]
         if board[n, m].status == true
             visualizer[n, m] = 'X' 
         else
@@ -101,13 +96,13 @@ end
 #initialize_plot
 function initialize_plot(board)
 	screen_resolution = Makie.primary_resolution()
-	plot = Figure(resolution = (/board(size)[1],/board(size)[2]),figure_padding = 1, backgroundcolor = :black);
+	plot = Figure(resolution = (floor(screenresolution[1]*.75), floor(screenresolution[2]*.75)), backgroundcolor = :black);
     return plot
 end
 
-#check_valid_neighbours
-function check_valid_neighbours(n, limit)
-    #vbs("check_valid_neighbours")
+#check_neighbour_valid
+function check_neighbour_valid(n, limit)
+    #vbs("check_neighbour_valid")
     if n == 0
        return limit
    elseif n == limit + 1
@@ -126,7 +121,7 @@ function count_alive_neighbours(n, m, board)
             #donothing
         else
 			#dbg("old cnt_nghbr", board[n, m].cnt_nghbr)
-            if board[check_valid_neighbours(n+dn, size(board)[1]), check_valid_neighbours(m+dm, size(board)[2])].status == true
+            if board[check_neighbour_valid(n+dn, size(board)[1]), check_neighbour_valid(m+dm, size(board)[2])].status == true
 				board[n, m].cnt_nghbr = board[n, m].cnt_nghbr+1 
 				#dbg("new cnt_nghbr", board[n, m].cnt_nghbr)
 			else
@@ -163,30 +158,45 @@ function update_cells(board)
     end
 end
 
-#plot_element
-function plot_element!(board, plot)
-    #vbs("plot_element!")
+#plot_elements (make plot array?)
+function plot_elements!(board, plot)
+    #vbs("plot_elements!")
     for n in 1:size(board)[1], m in 1:size(board)[2]
         if board[n, m].status == true
-            scatter()
+            scatter!(m, n, marker = :rect, markersize = floor(floor(screenresolution[1]*.75)/board(size)[2]), color = :white)
         else
-            scatter()
+			scatter!(m, n, marker = :rect, markersize = floor(/board(size)[1]), color = :black)
         end
     end
-    show(stdout, "text/plain", plot)
 end
 
-#main
-populate_board(board, ldens)
-check_valid_neighbour(n, limit)
-count_alive_neighbours(n, m, board)
-board_step!(board)
-#initialize_plot()
-#board_step!()
+#plot_array?
 
-#=
-plot = initialize_plot(bsr, bsc)
-sleep(1/fps)
-=#
+#= main =#
+#make_type_cell
+mutable struct Cell
+    status::Bool
+    cnt_nghbr::Int8
+    evo::Bool
+end
+
+#initialize_board
+#vbs("initialize_board")
+board = Array{Cell}(undef, bsr, bsc)
+
+initialize_visualizer(board)
+initialize_plot(board)
+
+populate_board(board, ldens)
+plot_elements!(board, plot);
+plot
+
+for i in 1:ltime
+	sleep(1/fps)
+	check_board(board)
+	update_cells(board)
+	plot_elements!(board, plot)
+end
+
 exit()
 
