@@ -3,7 +3,14 @@
 function initialize_figure(board, fig, plt)
 	screen_resolution = Makie.primary_resolution()
 	fig = Figure(resolution = (floor(screen_resolution[1]*.75), floor(screen_resolution[2]*.75)), backgroundcolor = :black);
-    plt = fig[1, 1]
+	#plt = Box(...)?
+	#=
+	fig = Figure()
+	rects = fig[1:rows, 1:cols] = [
+		Box(fig, color = :black)]
+	fig
+	=#
+    plt = Axis(fig[1, 1])
     return fig
 end
 

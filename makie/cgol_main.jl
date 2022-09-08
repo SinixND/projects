@@ -88,22 +88,7 @@ function refresh_visualizer(board, visualizer)
     end
     show(stdout, "text/plain", visualizer)
 end
-#=
-#initialize_figure
-function initialize_figure(board)
-	screen_resolution = Makie.primary_resolution()
-	fig = Figure(resolution = (floor(screen_resolution[1]*.75), floor(screen_resolution[2]*.75)), backgroundcolor = :black);
-	#plt = Box(...)?
-	#=
-	fig = Figure()
-	rects = fig[1:rows, 1:cols] = [
-		Box(fig, color = :black)]
-	fig
-	=#
-    plt = Axis(fig[size(board)[2], size(board)[1]])
-    return fig
-end
-=#
+
 #check_neighbour_valid
 function check_neighbour_valid(n, limit)
     #vbs("check_neighbour_valid")
@@ -161,20 +146,6 @@ function update_cells(board)
         board[n, m].status = board[n, m].evo
     end
 end
-#=
-#plot_elements (make plot array?)
-function plot_elements!(board, fig, plt)
-    #vbs("plot_elements!")
-	screen_resolution = Makie.primary_resolution()
-    for n in 1:size(board)[1], m in 1:size(board)[2]
-        if board[n, m].status == true
-            scatter!(plt, (m, n), marker = :rect, markersize = floor(floor(screen_resolution[1]*.75)/size(board)[2]), color = :white)
-        else
-            scatter!(plt, (m, n), marker = :rect, markersize = floor(floor(screen_resolution[1]*.75)/size(board)[1]), color = :black)
-        end
-    end
-end
-=#
 #plot_array?
 
 #= main =#
@@ -190,7 +161,7 @@ end
 board = Array{Cell}(undef, bsr, bsc)
 
 fig = Figure();
-plt = fig[1, 1]
+plt = fig[1, 1];
 initialize_figure(board, fig, plt)
 fig
 
