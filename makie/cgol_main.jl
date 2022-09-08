@@ -5,7 +5,7 @@ Pkg.instantiate()
 using GLMakie
 
 #Plot with (maybe have to remove '"')
-p = "scatter" 
+p = scatter 
 
 include("cgol_plot_$p.jl")
 
@@ -88,7 +88,7 @@ function refresh_visualizer(board, visualizer)
     end
     show(stdout, "text/plain", visualizer)
 end
-
+#=
 #initialize_figure
 function initialize_figure(board)
 	screen_resolution = Makie.primary_resolution()
@@ -103,7 +103,7 @@ function initialize_figure(board)
     plt = Axis(fig[size(board)[2], size(board)[1]])
     return fig
 end
-
+=#
 #check_neighbour_valid
 function check_neighbour_valid(n, limit)
     #vbs("check_neighbour_valid")
@@ -161,7 +161,7 @@ function update_cells(board)
         board[n, m].status = board[n, m].evo
     end
 end
-
+#=
 #plot_elements (make plot array?)
 function plot_elements!(board, fig, plt)
     #vbs("plot_elements!")
@@ -174,7 +174,7 @@ function plot_elements!(board, fig, plt)
         end
     end
 end
-
+=#
 #plot_array?
 
 #= main =#
@@ -189,9 +189,12 @@ end
 #vbs("initialize_board")
 board = Array{Cell}(undef, bsr, bsc)
 
-initialize_visualizer(board)
-initialize_figure(board)
+fig = Figure();
+plt = fig[1, 1]
+initialize_figure(board, fig, plt)
 fig
+
+initialize_visualizer(board)
 
 populate_board(board, ldens)
 plot_elements!(board, fig, plt);
@@ -201,7 +204,7 @@ for i in 1:ltime
 	sleep(1/fps)
 	check_board(board)
 	update_cells(board)
-	plot_elements!(board, fig, plt)
+	plot_elements!(board, fig)
 end
 
 exit()

@@ -1,9 +1,9 @@
 
 #initialize_figure
-function initialize_figure(board)
+function initialize_figure(board, fig, plt)
 	screen_resolution = Makie.primary_resolution()
 	fig = Figure(resolution = (floor(screen_resolution[1]*.75), floor(screen_resolution[2]*.75)), backgroundcolor = :black);
-    plt = Axis(fig[size(board)[2], size(board)[1]])
+    plt = fig[1, 1]
     return fig
 end
 
