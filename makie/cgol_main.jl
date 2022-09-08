@@ -88,7 +88,7 @@ end
 function initialize_figure(board)
 	screen_resolution = Makie.primary_resolution()
 	fig = Figure(resolution = (floor(screen_resolution[1]*.75), floor(screen_resolution[2]*.75)), backgroundcolor = :black);
-    ax = Axis(fig[size(board)[2], size(board)[1]])
+    plt = Axis(fig[size(board)[2], size(board)[1]])
     return fig
 end
 
@@ -151,14 +151,14 @@ function update_cells(board)
 end
 
 #plot_elements (make plot array?)
-function plot_elements!(board, fig)
+function plot_elements!(board, fig, plt)
     #vbs("plot_elements!")
 	screen_resolution = Makie.primary_resolution()
     for n in 1:size(board)[1], m in 1:size(board)[2]
         if board[n, m].status == true
-            scatter!(ax, (m, n), marker = :rect, markersize = floor(floor(screen_resolution[1]*.75)/size(board)[2]), color = :white)
+            scatter!(plt, (m, n), marker = :rect, markersize = floor(floor(screen_resolution[1]*.75)/size(board)[2]), color = :white)
         else
-            scatter!(ax, (m, n), marker = :rect, markersize = floor(floor(screen_resolution[1]*.75)/size(board)[1]), color = :black)
+            scatter!(plt, (m, n), marker = :rect, markersize = floor(floor(screen_resolution[1]*.75)/size(board)[1]), color = :black)
         end
     end
 end
@@ -182,14 +182,14 @@ initialize_figure(board)
 fig
 
 populate_board(board, ldens)
-plot_elements!(board, fig);
+plot_elements!(board, fig, plt);
 #fig
 
 for i in 1:ltime
 	sleep(1/fps)
 	check_board(board)
 	update_cells(board)
-	plot_elements!(board, fig)
+	plot_elements!(board, fig, plt)
 end
 
 exit()
