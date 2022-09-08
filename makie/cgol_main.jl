@@ -4,6 +4,11 @@ Pkg.instantiate()
 
 using GLMakie
 
+#Plot with (maybe have to remove '"')
+p = "scatter" 
+
+include("cgol_plot_$p.jl")
+
 bsr = 30 #boardsize rows
 bsc = 12 #boardsize columns
 ldens = .5 #life density as decimal (< 1)
@@ -88,6 +93,13 @@ end
 function initialize_figure(board)
 	screen_resolution = Makie.primary_resolution()
 	fig = Figure(resolution = (floor(screen_resolution[1]*.75), floor(screen_resolution[2]*.75)), backgroundcolor = :black);
+	#plt = Box(...)?
+	#=
+	fig = Figure()
+	rects = fig[1:rows, 1:cols] = [
+		Box(fig, color = :black)]
+	fig
+	=#
     plt = Axis(fig[size(board)[2], size(board)[1]])
     return fig
 end
