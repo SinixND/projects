@@ -9,11 +9,11 @@ p = scatter
 
 include("plot_$p.jl")
 
-bsr = 30 #boardsize rows
-bsc = 12 #boardsize columns
+bsr = 100 #boardsize rows
+bsc = 100 #boardsize columns
 ldens = .5 #life density as decimal (< 1)
-ltime = 100 #lifetime in ticks
-fps = 1 #frames per second
+ltime = 1000 #lifetime in ticks
+fps = 5 #frames per second
 
 #DEBUGGER
 function dbg(dbg_bp, args...)
@@ -160,22 +160,21 @@ end
 #vbs("initialize_board")
 board = Array{Cell}(undef, bsr, bsc)
 
-fig = Figure();
-plt = fig[1, 1];
+fig = Figure()
+plt = Axis(fig[1, 1])
 initialize_figure(board, fig, plt)
-fig
-
+display(fig) 
 initialize_visualizer(board)
 
 populate_board(board, ldens)
-plot_elements!(board, fig, plt);
-#fig
+plot_elements!(board, fig, plt)
 
 for i in 1:ltime
+    plt.title = "Day $i"
 	sleep(1/fps)
 	check_board(board)
 	update_cells(board)
-	plot_elements!(board, fig)
+	plot_elements!(board, fig, plt)
 end
 
 exit()
