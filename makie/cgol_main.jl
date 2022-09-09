@@ -7,7 +7,7 @@ using GLMakie
 #Plot with (maybe have to remove '"')
 p = scatter 
 
-include("cgol_plot_$p.jl")
+include("plot_$p.jl")
 
 bsr = 30 #boardsize rows
 bsc = 12 #boardsize columns
