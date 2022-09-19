@@ -33,11 +33,9 @@ function populate_board(board, ldens)
     for n in 1:size(board)[1], m in 1:size(board)[2]
         #implement_life_density
         if rand(0:.0001:1) <= ldens 
-            ###board[n, m] = Cell(true, 0, false)
-			board[n, m] = Cell(3, 0, false)###
+			board[n, m] = Cell(3, 0, false)
         else
-            ###board[n, m] = Cell(false, 0, false)
-			board[n, m] = Cell(0, 0, false)###
+			board[n, m] = Cell(0, 0, false)
 		end
     end
 end
@@ -54,14 +52,12 @@ end
 function refresh_visualizer(board, visualizer)
     #vbs("refresh_visualizer")
     for n in 1:size(board)[1], m in 1:size(board)[2]
-        ###if board[n, m].status == true
-        ###    visualizer[n, m] = 'X' 
-		if board[n, m].status == 3###
-            visualizer[n, m] = 'O'###
-        elseif board[n, m].status == 2###
-            visualizer[n, m] = 'o'###
-		elseif board[n, m].status == 1###
-			visualizer[n, m] = '.'###
+		if board[n, m].status == 3
+            visualizer[n, m] = 'O'
+        elseif board[n, m].status == 2
+            visualizer[n, m] = 'o'
+		elseif board[n, m].status == 1
+			visualizer[n, m] = '.'
 		else
 			visualizer[n, m] = ' '
         end
@@ -90,8 +86,7 @@ function count_alive_neighbours(n, m, board)
             #donothing
         else
 			#dbg("old cnt_nghbr", board[n, m].cnt_nghbr)
-            ###if board[check_neighbour_valid(n+dn, size(board)[1]), check_neighbour_valid(m+dm, size(board)[2])].status == true
-			if board[check_neighbour_valid(n+dn, size(board)[1]), check_neighbour_valid(m+dm, size(board)[2])].status > 2###
+			if board[check_neighbour_valid(n+dn, size(board)[1]), check_neighbour_valid(m+dm, size(board)[2])].status > 2
 				board[n, m].cnt_nghbr = board[n, m].cnt_nghbr+1 
 				#dbg("new cnt_nghbr", board[n, m].cnt_nghbr)
 			else
@@ -111,14 +106,11 @@ function check_board(board)
         if board[n, m].cnt_nghbr == 2
             board[n, m].evo = board[n, m].status
         elseif board[n, m].cnt_nghbr == 3
-            ###board[n, m].evo = true
-			board[n, m].evo = 3###
-        ###else
-            ###board[n, m].evo = false
-		elseif board[n, m].status > 0###
-			board[n, m].evo = board[n, m].status - 1###
-		else###
-			board[n, m].evo = 0###
+			board[n, m].evo = 3
+		elseif board[n, m].status > 0
+			board[n, m].evo = board[n, m].status - 1
+		else
+			board[n, m].evo = 0
         end
         #dbg("From status -> evo", board[n, m].status, " -> ", board[n, m].evo)
     end
@@ -136,11 +128,9 @@ end
 #= main =#
 #make_type_cell
 mutable struct Cell
-    ###status::Bool
-	status::Int8 ###
+	status::Int8 
     cnt_nghbr::Int8
-    ###evo::Bool
-	evo::Int8###
+	evo::Int8
 end
 
 #initialize_board
