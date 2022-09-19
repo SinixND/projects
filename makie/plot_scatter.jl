@@ -16,13 +16,21 @@ end
 #plot_elements (make plot array?)
 function plot_elements!(board, fig, plt)
     #vbs("plot_elements!")
-	tpl = Tuple{Int8, Int8}[]
+	tpl3 = Tuple{Int8, Int8}[]
+	tpl2 = Tuple{Int8, Int8}[]
+	tpl1 = Tuple{Int8, Int8}[]
     for n in 1:size(board)[1], m in 1:size(board)[2]
-        if board[n, m].status == true
-			append!(tpl, [(m, n)])
+        if board[n, m].status == 3
+			append!(tpl3, [(m, n)])
+        elseif board[n, m].status == 2
+			append!(tpl2, [(m, n)])
+        elseif board[n, m].status == 1
+			append!(tpl1, [(m, n)])
         end
     end
     empty!(plt)
-	scatter!(plt, tpl, color = :green)
+	scatter!(plt, tpl3, color = :darkgreen)
+	scatter!(plt, tpl2, color = :green)
+	scatter!(plt, tpl1, color = :lightgreen)
 end
 
