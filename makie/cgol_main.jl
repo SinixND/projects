@@ -146,7 +146,6 @@ function update_cells(board)
         board[n, m].status = board[n, m].evo
     end
 end
-#plot_array?
 
 #= main =#
 #make_type_cell
