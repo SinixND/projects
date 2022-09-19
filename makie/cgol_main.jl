@@ -9,11 +9,11 @@ p = scatter
 
 include("plot_$p.jl")
 
-bsr = 130 #boardsize rows
-bsc = 130 #boardsize columns
+bsr = 100 #boardsize rows
+bsc = 100 #boardsize columns
 ldens = .5 #life density as decimal (< 1)
 ltime = 1000 #lifetime in ticks
-fps = 15 #frames per second
+fps = 10 #frames per second
 
 #DEBUGGER
 function dbg(dbg_bp, args...)
@@ -103,8 +103,12 @@ function check_board(board)
     for n in 1:size(board)[1], m in 1:size(board)[2]
         count_alive_neighbours(n, m, board)
         #dbg("board[n, m].cnt_nghbr", n, m, board[n, m].cnt_nghbr)
-        if board[n, m].cnt_nghbr == 2
-            board[n, m].evo = board[n, m].status
+        if board[n, m].cnt_nghbr == 2 
+            if board[n, m].status < 3 && board[n, m].status > 0
+                board[n, m].evo = board[n, m].status - 1
+            else
+                board[n, m].evo = board[n, m].status
+            end
         elseif board[n, m].cnt_nghbr == 3
 			board[n, m].evo = 3
 		elseif board[n, m].status > 0
@@ -114,7 +118,6 @@ function check_board(board)
         end
         #dbg("From status -> evo", board[n, m].status, " -> ", board[n, m].evo)
     end
-    #board
 end
 
 #update_cells
@@ -137,9 +140,10 @@ end
 #vbs("initialize_board")
 board = Array{Cell}(undef, bsr, bsc)
 
-fig = Figure()
-plt = Axis(fig[1, 1])
-initialize_figure(board, fig, plt)
+scr_res = Makie.primary_resolution()
+fig = Figure(resolution = (floor(scr_res[2]), floor(scr_res[2])), backgroundcolor = :black)
+plt = Axis(fig[1, 1], aspect = 1, backgroundcolor = :black)
+resize_to_layout!(fig) 
 display(fig) 
 
 ##visualizer = initialize_visualizer(board)

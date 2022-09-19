@@ -1,17 +1,3 @@
-#initialize_figure
-function initialize_figure(board, fig, plt)
-	scr_res = Makie.primary_resolution()
-    fig = Figure(resolution = (floor(scr_res[1]*.75), floor(scr_res[2]*.75)), backgroundcolor = :black);
-    plt = Axis(fig[1, 1])
-    if size(board)[1] > size(board)[2]
-        limits!(plt, 0, size(board)[1], 0, size(board)[1])
-    else
-        limits!(plt, 0, size(board)[2], 0, size(board)[2])
-    end
-    return fig
-end
-
-
 #plot_elements (make plot array?)
 function plot_elements!(board, fig, plt)
     #vbs("plot_elements!")
@@ -31,8 +17,8 @@ function plot_elements!(board, fig, plt)
         end
     end
     empty!(plt)
-	scatter!(plt, tpl1, color = :lightgreen)
-	scatter!(plt, tpl2, color = :green)
-	scatter!(plt, tpl3, color = :darkgreen)
+    scatter!(plt, tpl3, color = :white)
+	scatter!(plt, tpl2, color = :grey)
+	scatter!(plt, tpl1, color = :darkgrey)
 end
 
