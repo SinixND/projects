@@ -9,11 +9,11 @@ p = scatter
 
 include("plot_$p.jl")
 
-bsr = 100 #boardsize rows
-bsc = 100 #boardsize columns
+bsr = 130 #boardsize rows
+bsc = 130 #boardsize columns
 ldens = .5 #life density as decimal (< 1)
 ltime = 1000 #lifetime in ticks
-fps = 5 #frames per second
+fps = 15 #frames per second
 
 #DEBUGGER
 function dbg(dbg_bp, args...)
@@ -91,7 +91,7 @@ function count_alive_neighbours(n, m, board)
         else
 			#dbg("old cnt_nghbr", board[n, m].cnt_nghbr)
             ###if board[check_neighbour_valid(n+dn, size(board)[1]), check_neighbour_valid(m+dm, size(board)[2])].status == true
-			if board[check_neighbour_valid(n+dn, size(board)[1]), check_neighbour_valid(m+dm, size(board)[2])].status >= 2###
+			if board[check_neighbour_valid(n+dn, size(board)[1]), check_neighbour_valid(m+dm, size(board)[2])].status > 2###
 				board[n, m].cnt_nghbr = board[n, m].cnt_nghbr+1 
 				#dbg("new cnt_nghbr", board[n, m].cnt_nghbr)
 			else
@@ -147,25 +147,24 @@ end
 #vbs("initialize_board")
 board = Array{Cell}(undef, bsr, bsc)
 
-#=
 fig = Figure()
 plt = Axis(fig[1, 1])
 initialize_figure(board, fig, plt)
 display(fig) 
-=#
-initialize_visualizer(board)
+
+##visualizer = initialize_visualizer(board)
 
 populate_board(board, ldens)
-##plot_elements!(board, fig, plt)
-refresh_visualizer(board, visualizer)
+plot_elements!(board, fig, plt)
+##refresh_visualizer(board, visualizer)
 
 for i in 1:ltime
     plt.title = "Day $i"
 	sleep(1/fps)
 	check_board(board)
 	update_cells(board)
-	##plot_elements!(board, fig, plt)
-	refresh_visualizer(board, visualizer)
+	plot_elements!(board, fig, plt)
+	##refresh_visualizer(board, visualizer)
 end
 
 exit()
