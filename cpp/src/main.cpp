@@ -1,8 +1,8 @@
-#include "hello.h"
+#include <iostream>
 
-int main( )
-{
-    hello( );
-    goodbye( 10 );
-    return 0;
+using namespace std;
+
+int main() {
+	cout << "Hello World!" << endl;
+	return 0;
 }

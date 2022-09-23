@@ -7,12 +7,12 @@ INC_DIRS := $(addprefix -I,$(INC_DIR))
 LIB_DIR := ./lib 
 LIB_DIRS := $(addprefix -L,$(LIB_DIR))
 
-LIB_FLAG := R Rcpp RcppArmadillo RInside
+LIB_FLAG := 
 LIB_FLAGS := $(addprefix -l,$(LIB_FLAG))
 
 CXX := g++ 
 CXXFLAGS := -g -Wall #-std=c++17
-EXEC := prog
+EXEC := prog.exe
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
