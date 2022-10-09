@@ -10,7 +10,7 @@ LIB_DIR := ./lib \
 		   /usr/lib64/
 LIB_DIRS := $(addprefix -L,$(LIB_DIR))
 
-LIB_FLAG := sfml-graphics sfml-window sfml-system 
+LIB_FLAG := sfml-network sfml-graphics sfml-window sfml-system 
 LIB_FLAGS := $(addprefix -l,$(LIB_FLAG))
 
 CXX := g++ 
