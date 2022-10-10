@@ -1,8 +1,9 @@
-#include "hello.h"
+#include <string>
+#include <iostream>
 
-int main( )
-{
-    hello( );
-    goodbye( 10 );
-    return 0;
+#include "classes.h"
+
+int main( ) {
+    Klasse Objekt("ObjName");
+	Objekt.Methode();
 }

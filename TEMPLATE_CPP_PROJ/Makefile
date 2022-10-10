@@ -4,10 +4,10 @@ OBJ_DIR := ./obj
 INC_DIR := ./inc
 INC_DIRS := $(addprefix -I,$(INC_DIR))
 
-LIB_DIR := ./lib 
+LIB_DIR := ./lib
 LIB_DIRS := $(addprefix -L,$(LIB_DIR))
 
-LIB_FLAG := R Rcpp RcppArmadillo RInside
+LIB_FLAG := 
 LIB_FLAGS := $(addprefix -l,$(LIB_FLAG))
 
 CXX := g++ 
@@ -16,16 +16,14 @@ EXEC := prog
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-#prog: hello.o main.o
-${EXEC}: ${OBJS}
-#	g++	-g -Wall -o prog hello.o main.o
-	${CXX} ${CXXFLAGS} -o $(BIN_DIR)/${EXEC} ${OBJS} 
+${EXEC} : ${OBJS}
+	${CXX} ${CXXFLAGS} -o $(BIN_DIR)/${EXEC} ${OBJS} $(LIB_DIRS) $(LIB_FLAGS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	${CXX} ${CXXFLAGS} $(INC_DIRS) $(LIB_DIRS) -o $@ -c $< $(LIB_FLAGS)
-#	evtl. -c $^
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp
+	${CXX} ${CXXFLAGS} $(INC_DIRS) -c $< -o $@ 
+	#evtl. -c $^
 run: 
 	$(BIN_DIR)/$(EXEC)
 
 clean:
-	rm -f $(BIN_DIR)/$(EXEC) $(OBJ_DIR)/${OBJS}
+	rm -f $(BIN_DIR)/$(EXEC) ${OBJS}
