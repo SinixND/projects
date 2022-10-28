@@ -13,17 +13,25 @@ LIB_FLAGS := $(addprefix -l,$(LIB_FLAG))
 CXX := g++ 
 CXXFLAGS := -g -Wall #-std=c++17
 EXEC := prog
-SRC := $(wildcard $(SRC_DIR)/*.cpp)
+SRC := $(wildcard */*.cpp) 
 OBJS := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
+.PHONY: all
+
+all: ${EXEC}
+
 ${EXEC} : ${OBJS}
-	${CXX} ${CXXFLAGS} -o $(BIN_DIR)/${EXEC} ${OBJS} $(LIB_DIRS) $(LIB_FLAGS)
+	${CXX} ${CXXFLAGS} -o $(BIN_DIR)/$@ $^ $(INC_DIRS) $(LIB_DIRS) $(LIB_FLAGS)
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp
 	${CXX} ${CXXFLAGS} $(INC_DIRS) -c $< -o $@ 
-	#evtl. -c $^
+	#evtl. -c $^ instead of $<
+
 run: 
 	$(BIN_DIR)/$(EXEC)
 
 clean:
-	rm -f $(BIN_DIR)/$(EXEC) ${OBJS}
+	rm -f $(BIN_DIR)/* ${OBJ_DIR}/*
+
+.PHONY: all run clean
+

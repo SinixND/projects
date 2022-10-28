@@ -1,5 +1,5 @@
-#ifndef __CLASSES_H__
-#define __CLASSES_H__
+#ifndef CLASSES_H
+#define CLASSES_H
 
 #include <string>
 #include <iostream>
@@ -9,21 +9,14 @@ private:
 	std::string Attribut;
 
 public:
-	void setAttribut(std::string attribut){
-		Attribut = attribut;
-	};
+	void setAttribut(std::string attribut);
 
-	std::string getAttribut(){
-		return Attribut;
-	};
+	std::string getAttribut();
 	
-	void Methode(){
-		std::cout << Attribut << std::endl;
-	};
+	void Methode();
+
 	//constructor
-	Klasse(std::string attribut){
-		Attribut = attribut;
-	};
+	Klasse(std::string attribut);
 };
 
 #endif
