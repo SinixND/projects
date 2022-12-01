@@ -3,12 +3,22 @@
 
 #include "classes.h"
 
-//#define DEBUG
+using namespace std;
+
+///#define DEBUG
+
+template<typename T>
+T f(T &x){
+	return x;
+}
 
 int main( ) {
 #ifdef DEBUG
-	cout << "Start of file" << endl;		
+	cout << "debug" << endl;		
 #endif
     Klasse Objekt("ObjName");
 	Objekt.Methode();
+
+	int a{1};
+	cout << f(a) << endl;	
 }
