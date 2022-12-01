@@ -17,6 +17,8 @@ public:
 
 	//constructor
 	Klasse(std::string attribut);
+	//destructor
+	~Klasse();
 };
 
 #endif

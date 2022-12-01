@@ -18,3 +18,6 @@ void Klasse::Methode(){
 Klasse::Klasse(std::string attribut){
 	Attribut = attribut;
 };
+//destructor
+Klasse::~Klasse(){
+};
