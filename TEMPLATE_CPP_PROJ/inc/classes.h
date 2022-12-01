@@ -10,8 +10,8 @@ private:
 
 public:
 	void setAttribut(std::string attribut);
-
-	std::string getAttribut();
+	
+	std::string getAttribut(); //one per attribute
 	
 	void Methode();
 
