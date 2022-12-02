@@ -13,8 +13,8 @@ LIB_DIRS := $(addprefix -L,$(LIB_DIR))
 LIB_FLAG := 
 LIB_FLAGS := $(addprefix -l,$(LIB_FLAG))
 
-CXX := g++ 
-CXXFLAGS := -g -Wall #-std=c++17
+CXX := clang++ #g++ 
+CXXFLAGS := -g -Wall -Wextra #-std=c++17
 BINARY := prog
 SRCS := $(wildcard */*.$(SRC_EXT))
 OBJS := $(addprefix $(OBJ_DIR)/,$(SRCS:.$(SRC_EXT)=.$(OBJ_EXT)))
@@ -28,6 +28,8 @@ $(info $(OBJS))
 # $(BINARY) depends on $(OBJS) to be build/linked; make looks for a rule to bulid $(OBJS)
 
 all: preclean $(BIN_DIR)/$(BINARY) run postclean
+
+build: $(BIN_DIR)/$(BINARY)
 
 # link command
 $(BIN_DIR)/$(BINARY): $(OBJS)
@@ -48,4 +50,4 @@ clean: preclean
 preclean postclean:
 	rm -rf $(BIN_DIR)/* $(OBJ_DIR)/*
 
-.PHONY: all run clean preclean postclean
+.PHONY: all build run clean preclean postclean
