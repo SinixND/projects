@@ -4,7 +4,7 @@
 # $(TARGET) depends on $(OBJ_FILES) to be build/linked; make looks for a rule to bulid $(OBJ_FILES)
 
 CXX := clang++ #g++ 
-TARGET := prog
+TARGET := main
 SRC_EXT := cpp
 OBJ_EXT := o
 CAT := $(if $(filter $(OS),Windows_NT),type,cat)
