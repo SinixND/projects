@@ -17,13 +17,16 @@ LIB_DIR := ./lib
 OBJ_DIR := ./build
 
 MAKEFLAGS := -j4
-CXX_FLAGS := -g -Wall -Wextra -ggdb -MMD -MP #-std=c++17
+CXX_FLAGS := -g -Wall -Wextra -ggdb -MMD -MP
 LD_FLAG := 
 
 VPATH := $(SRC_DIR) $(INC_DIR) $(BIN_DIR) $(LIB_DIR) $(OBJ_DIR) $(CONF_DIR)
 
 INC_FLAGS := $(addprefix -I,$(INC_DIR))
-LIB_FLAGS := $(addprefix -L,$(LIB_DIR))
+CXX_FLAGS += $(INC_FLAGS) \
+			 `wx-config --cxxflags`
+LIB_FLAGS := $(addprefix -L,$(LIB_DIR)) \
+			 `wx-config --libs all`
 LD_FLAGS := $(addprefix -l,$(LD_FLAG))
 
 SRC_FILES := $(wildcard */*.$(SRC_EXT))
@@ -47,7 +50,7 @@ $(BIN_DIR)/$(TARGET): $(OBJ_FILES)
 # compile command
 $(OBJ_DIR)/%.$(OBJ_EXT): %.$(SRC_EXT)
 	mkdir -p $(@D)
-	$(CXX) $(CXX_FLAGS) $(INC_FLAGS) -c $< -o $@ 
+	$(CXX) $(CXX_FLAGS) $(INC_FLAGS) -c $< -o $@ #$(INC_FLAGS)
 
 
 clean:  
