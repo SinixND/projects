@@ -1,0 +1,1 @@
+`wx-config --libs all`
