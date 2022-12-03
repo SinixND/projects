@@ -1,31 +1,55 @@
 SRC_DIR := ./src
 BIN_DIR := ./bin
 OBJ_DIR := ./obj
-INC_DIR := ./inc
-INC_DIRS := $(addprefix -I,$(INC_DIR))
-
+INC_DIR := ./inc 
 LIB_DIR := ./lib 
+SRC_EXT := cpp
+OBJ_EXT := o
+VPATH := $(SRC_DIR) $(INC_DIR) $(BIN_DIR)
+MAKEFLAGS := -j4
+
+INC_DIRS := $(addprefix -I,$(INC_DIR))
 LIB_DIRS := $(addprefix -L,$(LIB_DIR))
 
 LIB_FLAG := 
 LIB_FLAGS := $(addprefix -l,$(LIB_FLAG))
 
-CXX := g++ 
-CXXFLAGS := -g -Wall #-std=c++17
-EXEC := prog.exe
-SRC := $(wildcard $(SRC_DIR)/*.cpp)
-OBJS := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+CXX := clang++ #g++ 
+CXXFLAGS := -g -Wall -Wextra -ggdb -MMD -MP#-std=c++17
+BINARY := prog
+SRCS := $(wildcard */*.$(SRC_EXT))
+OBJS := $(addprefix $(OBJ_DIR)/,$(SRCS:.$(SRC_EXT)=.$(OBJ_EXT)))
 
-#prog: hello.o main.o
-${EXEC}: ${OBJS}
-#	g++	-g -Wall -o prog hello.o main.o
-	${CXX} ${CXXFLAGS} -o $(BIN_DIR)/${EXEC} ${OBJS} 
+# $@(target, left of :) \
+	$< (first prerequesite, first right of :) \
+	$^ (all prerequesites, all right of :) 
+# debug:
+$(info $(SRCS))
+$(info $(OBJS))
+# $(BINARY) depends on $(OBJS) to be build/linked; make looks for a rule to bulid $(OBJS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	${CXX} ${CXXFLAGS} $(INC_DIRS) $(LIB_DIRS) -o $@ -c $< $(LIB_FLAGS)
-#	evtl. -c $^
-run: 
-	$(BIN_DIR)/$(EXEC)
+.PHONY: all build run clean cleanrun  
 
-clean:
-	rm -f $(BIN_DIR)/$(EXEC) $(OBJ_DIR)/${OBJS}
+all: run
+
+cleanrun: clean run
+
+run: build
+	$(BIN_DIR)/$(BINARY)
+
+build: $(BIN_DIR)/$(BINARY)
+# link command
+$(BIN_DIR)/$(BINARY): $(OBJS)
+	$(CXX) -o $@ $^ $(INC_DIRS) $(LIB_DIRS) $(LIB_FLAGS)
+	@echo link command successful
+
+# compile command
+$(OBJ_DIR)/%.$(OBJ_EXT): %.$(SRC_EXT) 
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INC_DIRS) -c $< -o $@ 
+	@echo compile command successful
+
+
+clean:  
+	rm -rf $(BIN_DIR)/* $(OBJ_DIR)/*
+
