@@ -1,6 +1,6 @@
-build/src/main.o: src/main.cpp /usr/include/wx-3.2/wx/wxprec.h \
-  /usr/include/wx-3.2/wx/defs.h /usr/include/wx-3.2/wx/platform.h \
-  /usr/include/wx-3.2/wx/compiler.h \
+build/src/wxAppMain.o: src/wxAppMain.cpp include/wxAppMain.h \
+  /usr/include/wx-3.2/wx/wxprec.h /usr/include/wx-3.2/wx/defs.h \
+  /usr/include/wx-3.2/wx/platform.h /usr/include/wx-3.2/wx/compiler.h \
   /usr/lib/wx/include/gtk3-unicode-3.2/wx/setup.h \
   /usr/include/wx-3.2/wx/chkconf.h /usr/include/wx-3.2/wx/gtk/chkconf.h \
   /usr/include/wx-3.2/wx/unix/chkconf.h /usr/include/wx-3.2/wx/version.h \
@@ -133,7 +133,10 @@ build/src/main.o: src/main.cpp /usr/include/wx-3.2/wx/wxprec.h \
   /usr/include/wx-3.2/wx/gtk/filedlg.h \
   /usr/include/wx-3.2/wx/gtk/filectrl.h \
   /usr/include/wx-3.2/wx/filectrl.h /usr/include/wx-3.2/wx/mdi.h \
-  /usr/include/wx-3.2/wx/gtk/mdi.h
+  /usr/include/wx-3.2/wx/gtk/mdi.h include/wxFrameMainWindow.h \
+  include/wxFrameMainWindowIcon.h
+
+include/wxAppMain.h:
 
 /usr/include/wx-3.2/wx/wxprec.h:
 
@@ -590,3 +593,7 @@ build/src/main.o: src/main.cpp /usr/include/wx-3.2/wx/wxprec.h \
 /usr/include/wx-3.2/wx/mdi.h:
 
 /usr/include/wx-3.2/wx/gtk/mdi.h:
+
+include/wxFrameMainWindow.h:
+
+include/wxFrameMainWindowIcon.h:
