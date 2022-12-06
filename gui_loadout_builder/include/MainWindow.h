@@ -8,10 +8,13 @@
 #endif
 
 //make a new frame class; must derive from wxFrame
-class MainWindow : public wxFrame{
+class MainWindow : public wxFrame(){
 public:
 	//declare constructor with title parameter
 	MainWindow(const wxString& title);
+
+	//destructor
+	~MainWindow();
 };
 
 #endif

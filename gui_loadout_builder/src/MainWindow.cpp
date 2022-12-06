@@ -6,3 +6,8 @@ MainWindow::MainWindow(const wxString& title) : wxFrame(NULL, wxID_ANY, title, w
     SetIcon(wxIcon(cwd_path + "/data/graphics/LoadoutBuilder.xpm"));
     Center();
 };
+
+//destructor
+MainWindow::~MainWindow(){
+};
+
