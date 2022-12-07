@@ -1,5 +1,5 @@
-#ifndef CAPP_H
-#define CAPP_H
+#ifndef capp_h
+#define capp_h
 
 #include <wx/wxprec.h>
 

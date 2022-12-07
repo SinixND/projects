@@ -1,5 +1,5 @@
-#ifndef CMAINFRAME_H
-#define CMAINFRAME_H
+#ifndef cframemain_h
+#define cframemain_h
 
 #include <wx/wxprec.h>
 
@@ -8,13 +8,13 @@
 #endif
 
 //make a new frame class; must derive from wxFrame
-class cMainFrame : public wxFrame(){
+class cFrameMain : public wxFrame(){
 public:
 	//declare constructor with title parameter
-	cMainFrame(const wxString& title);
+	cFrameMain(const wxString &rTitle);
 
 	//destructor
-	~cMainFrame();
+	~cFrameMain();
 };
 
 #endif
