@@ -1,11 +1,13 @@
 GENERAL NAMING CONVENTION:
-Classes: (cM)yClass
-Objecht: (oM)y_Object
-MemberAttributes: 
-Variables: 
-Constants: (k)Const
-Functions: (M)yFunction
-Enums: (k)Enums
+Classes: (cN)ounClass
+MemberAttributes: (mC)lassAttribute 
+(Member-)Functions: (v)erbFunction
+Object: oMyObject
+Pointers: pPointer
+Reference: rReferenceVar
+Constants: kConstVar
+Statics: sStaticVar
+Variables: my_variable
 Macros: (MYCLASS_H)
 
 GIT PUSH:
