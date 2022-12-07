@@ -1,24 +1,26 @@
 #include <string>
 #include <iostream>
 
-#include "classes.h"
+#include "cClass.h"
 
 using namespace std;
 
 ///#define DEBUG
 
-template<typename T>
-T f(T &x){
-	return x;
+template<typename MyType>
+MyType doFunct(MyType &argument){
+	return argument;
 }
 
-int main( ) {
+int main(int argc, char **argv) {
 #ifdef DEBUG
 	cout << "debug" << endl;		
 #endif
-    Klasse Objekt("ObjName");
-	Objekt.Methode();
+    cClass oObject("ObjName");
+	oObject.doMethod();
 
 	int a{1};
-	cout << f(a) << endl;	
+	cout << doFunct(a) << endl;	
+
+    return 0;
 }

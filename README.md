@@ -1,14 +1,18 @@
 GENERAL NAMING CONVENTION:
-Classes: (cN)ounClass
-MemberAttributes: (mC)lassAttribute 
-(Member-)Functions: (v)erbFunction
+
+Variables: my_var
+Classes: cParentClass
+    no "_"
+private Member Attributes: mClassAttribute 
+public Member Attribute: see Variable
+(Member-)Functions: verbFunction
 Object: oMyObject
 Pointers: pPointer
 Reference: rReferenceVar
 Constants: kConstVar
+Global Constants: CONST_VAR
 Statics: sStaticVar
-Variables: my_variable
-Macros: (MYCLASS_H)
+Macros: (_MYCLASS_H_)
 
 GIT PUSH:
 git add. && git commit -m "msg" -a && git push -v
