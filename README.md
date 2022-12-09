@@ -25,3 +25,5 @@ git remote set-url origin https://URL
 
 Julia arguments:
 julia --threads=auto
+
+make clean && bear -- make

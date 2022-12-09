@@ -1,0 +1,58 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-ggdb",
+      "-I./include/",
+      "-I/usr/include/wx-3.2/",
+      "-I/usr/lib/wx/include/gtk3-unicode-3.2/",
+      "-I/usr/lib/wx/include/gtk3-unicode-3.2",
+      "-I/usr/include/wx-3.2",
+      "-DWXUSINGDLL",
+      "-D__WXGTK3__",
+      "-D__WXGTK__",
+      "-pthread",
+      "-I./include/",
+      "-I/usr/include/wx-3.2/",
+      "-I/usr/lib/wx/include/gtk3-unicode-3.2/",
+      "-c",
+      "-o",
+      "build/src/cFrameMain.o",
+      "src/cFrameMain.cpp"
+    ],
+    "directory": "/home/arch/git_projects/gui_loadout_builder",
+    "file": "/home/arch/git_projects/gui_loadout_builder/src/cFrameMain.cpp",
+    "output": "/home/arch/git_projects/gui_loadout_builder/build/src/cFrameMain.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-ggdb",
+      "-I./include/",
+      "-I/usr/include/wx-3.2/",
+      "-I/usr/lib/wx/include/gtk3-unicode-3.2/",
+      "-I/usr/lib/wx/include/gtk3-unicode-3.2",
+      "-I/usr/include/wx-3.2",
+      "-DWXUSINGDLL",
+      "-D__WXGTK3__",
+      "-D__WXGTK__",
+      "-pthread",
+      "-I./include/",
+      "-I/usr/include/wx-3.2/",
+      "-I/usr/lib/wx/include/gtk3-unicode-3.2/",
+      "-c",
+      "-o",
+      "build/src/cApp.o",
+      "src/cApp.cpp"
+    ],
+    "directory": "/home/arch/git_projects/gui_loadout_builder",
+    "file": "/home/arch/git_projects/gui_loadout_builder/src/cApp.cpp",
+    "output": "/home/arch/git_projects/gui_loadout_builder/build/src/cApp.o"
+  }
+]
