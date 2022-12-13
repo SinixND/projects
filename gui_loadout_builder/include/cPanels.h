@@ -23,7 +23,7 @@ public:
 
     //member-functions
     void OnPlus(wxCommandEvent &rEvent);
-    void OnMinux(wxCommandEvent &rEvent);
+    void OnMinus(wxCommandEvent &rEvent);
 };
 
 class cRightPanel : public wxPanel
@@ -34,7 +34,7 @@ public:
     wxStaticText *pm_text;
 };
 
-const int kID_PLUS = 101;
-const int kID_MINUS = 102;
+const int k_ID_PLUS = 101;
+const int k_ID_MINUS = 102;
 
 #endif
