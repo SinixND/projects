@@ -1,29 +1,28 @@
 #ifndef _CFRAMES_H_
 #define _CFRAMES_H_
 
-#include "cPanels.h"
-#include <wx/wxprec.h>
-
-#ifndef WX_PRECOMP
-	#include <wx/wx.h>
-#endif
+#include <wx/wx.h>
 
 //make a new frame class; must derive from wxFrame
-class cFrames : public wxFrame
+class cFrameMain : public wxFrame
 {
 public:
 	//declare constructor with title parameter
-	cFrames(const wxString &rTitle);
+	cFrameMain(const wxString &rTitle);
 
-	cLeftPanel *pm_leftPanel;
-	cRightPanel *pm_rightPanel;
-	wxPanel *pm_parent;
+private:
+	wxMenuBar *pm_menuBar;
+	wxMenu *pm_menuFile;
+	wxMenu *pm_menuHelp;
 
-	//declare function that gets triggered by an event
-    void OnQuit(wxCommandEvent &rEventQuit);
+    //wxPanel *pm_panelItems;
+	//wxButton *pm_buttonChoose;
+
+    void OnExitClicked(wxCommandEvent &rEvent);
+    void OnAboutClicked(wxCommandEvent &rEvent);
 
 	//destructor
-	~cFrames();
+	~cFrameMain();
 };
 
 #endif

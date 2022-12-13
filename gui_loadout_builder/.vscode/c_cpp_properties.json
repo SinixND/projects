@@ -4,15 +4,15 @@
             "name": "gcc default",
             "includePath": [
                 "${default}",
-                "${workspaceFolder}/**",
-                "/usr/include/**",
-                "/usr/lib/**",
-                "/usr/include/linux/**"
+                "${workspaceFolder}",
+                "/usr/include",
+                "/usr/lib",
+                "/usr/include/linux"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c17",
-            "cppStandard": "c++17",
+            "cppStandard": "c++23",
             "intelliSenseMode": "linux-gcc-x64"
         }
     ],

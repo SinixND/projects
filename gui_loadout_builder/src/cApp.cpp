@@ -8,10 +8,10 @@ wxIMPLEMENT_APP(cApp);
 bool cApp::OnInit()
 {
     //make pointer to new object of a type cFrames and the (title)argument
-    cFrames *pFrameMain = new cFrames("MAIN-WINDOW-TITLE");
+    cFrameMain *pm_FrameMain = new cFrameMain("MAIN-WINDOW-TITLE");
 
     //access the member function of frame-object via pointer; same as (*p).mfunc()
-    pFrameMain->Show(true);
+    pm_FrameMain->Show(true);
 
     return true;
 }
