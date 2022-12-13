@@ -133,7 +133,7 @@ build/src/cApp.o: src/cApp.cpp include/cApp.h \
   /usr/include/wx-3.2/wx/gtk/filedlg.h \
   /usr/include/wx-3.2/wx/gtk/filectrl.h \
   /usr/include/wx-3.2/wx/filectrl.h /usr/include/wx-3.2/wx/mdi.h \
-  /usr/include/wx-3.2/wx/gtk/mdi.h include/cFrameMain.h
+  /usr/include/wx-3.2/wx/gtk/mdi.h include/cFrames.h
 
 include/cApp.h:
 
@@ -593,4 +593,4 @@ include/cApp.h:
 
 /usr/include/wx-3.2/wx/gtk/mdi.h:
 
-include/cFrameMain.h:
+include/cFrames.h:

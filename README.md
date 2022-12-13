@@ -10,7 +10,7 @@ Object: oMyObject
 Pointers: pPointer
 Reference: rReferenceVar
 Constants: kConstVar
-Global Constants: CONST_VAR
+Global Constants: kCONST_VAR
 Statics: sStaticVar
 Macros: (_MYCLASS_H_)
 

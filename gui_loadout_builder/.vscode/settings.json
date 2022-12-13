@@ -6,5 +6,6 @@
             "binaryPath": "/home/arch/git_projects/gui_loadout_builder/bin/main",
             "binaryArgs": []
         }
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "enabled"
 }

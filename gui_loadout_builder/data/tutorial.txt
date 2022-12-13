@@ -1,0 +1,158 @@
+Widgets communicate
+
+It is important to know, how widgets can communicate in application. Follow the next example.
+
+Panels.h
+
+#include <wx/wx.h>
+#include <wx/panel.h>
+
+class LeftPanel : public wxPanel
+{
+public:
+    LeftPanel(wxPanel *parent);
+
+    void OnPlus(wxCommandEvent & event);
+    void OnMinus(wxCommandEvent & event);
+
+    wxButton *m_plus;
+    wxButton *m_minus;
+    wxPanel *m_parent;
+    int count;
+
+};
+
+class RightPanel : public wxPanel
+{
+public:
+    RightPanel(wxPanel *parent);
+
+    void OnSetText(wxCommandEvent & event);
+
+    wxStaticText *m_text;
+
+};
+
+const int ID_PLUS = 101;
+const int ID_MINUS = 102;
+
+Panels.cpp
+
+#include <wx/stattext.h>
+#include "Communicate.h"
+
+LeftPanel::LeftPanel(wxPanel * parent)
+       : wxPanel(parent, -1, wxPoint(-1, -1), wxSize(-1, -1), wxBORDER_SUNKEN)
+{
+  count = 0;
+  m_parent = parent;
+  m_plus = new wxButton(this, ID_PLUS, wxT("+"), 
+      wxPoint(10, 10));
+  m_minus = new wxButton(this, ID_MINUS, wxT("-"), 
+      wxPoint(10, 60));
+  Connect(ID_PLUS, wxEVT_COMMAND_BUTTON_CLICKED, 
+      wxCommandEventHandler(LeftPanel::OnPlus));
+  Connect(ID_MINUS, wxEVT_COMMAND_BUTTON_CLICKED, 
+      wxCommandEventHandler(LeftPanel::OnMinus));
+}
+
+void LeftPanel::OnPlus(wxCommandEvent & WXUNUSED(event))
+{
+  count++;
+
+  Communicate *comm = (Communicate *) m_parent->GetParent();
+  comm->m_rp->m_text->SetLabel(wxString::Format(wxT("%d"), count));
+}
+
+void LeftPanel::OnMinus(wxCommandEvent & WXUNUSED(event))
+{
+  count--;
+
+  Communicate *comm = (Communicate *) m_parent->GetParent();
+  comm->m_rp->m_text->SetLabel(wxString::Format(wxT("%d"), count));
+}
+
+
+RightPanel::RightPanel(wxPanel * parent)
+       : wxPanel(parent, wxID_ANY, wxDefaultPosition, 
+         wxSize(270, 150), wxBORDER_SUNKEN)
+{
+    m_text = new wxStaticText(this, -1, wxT("0"), wxPoint(40, 60));
+}
+
+Communicate.h
+
+#include "Panels.h"
+#include <wx/wxprec.h>
+
+
+class Communicate : public wxFrame
+{
+public:
+    Communicate(const wxString& title);
+
+
+    LeftPanel *m_lp;
+    RightPanel *m_rp;
+    wxPanel *m_parent;
+
+};
+
+Communicate.cpp
+
+#include "Communicate.h"
+
+Communicate::Communicate(const wxString& title)
+       : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(290, 150))
+{
+  m_parent = new wxPanel(this, wxID_ANY);
+
+  wxBoxSizer *hbox = new wxBoxSizer(wxHORIZONTAL);
+
+  m_lp = new LeftPanel(m_parent);
+  m_rp = new RightPanel(m_parent);
+
+  hbox->Add(m_lp, 1, wxEXPAND | wxALL, 5);
+  hbox->Add(m_rp, 1, wxEXPAND | wxALL, 5);
+
+  m_parent->SetSizer(hbox);
+
+  this->Centre();
+}
+
+main.h
+
+#include <wx/wx.h>
+
+class MyApp : public wxApp
+{
+  public:
+    virtual bool OnInit();
+};
+
+main.cpp
+
+#include "main.h"
+#include "Communicate.h"
+
+IMPLEMENT_APP(MyApp)
+
+bool MyApp::OnInit()
+{
+
+    Communicate *communicate = new Communicate(wxT("Widgets communicate"));
+    communicate->Show(true);
+
+    return true;
+}
+
+In our example we have two panels. A left and right panel. The left panel has two buttons. The right panel has one static text. The buttons change the number displayed in the static text. The question is, how do we grab the pointer to the static text?
+
+m_parent = parent;
+
+Here we save the pointer to the parent widget of the LeftPanel. It is a wxPanel widget.
+
+Communicate *comm = (Communicate *) m_parent->GetParent();
+comm->m_rp->m_text->SetLabel(wxString::Format(wxT("%d"), count));
+
+These two lines are the most important lines of the example. It is shown, how we get access to the static text widget, which is placed on a different panel. First we get the parent of the both left and right panels. This parent widget has a pointer to the right panel. And the right panel has a pointer to the static text.

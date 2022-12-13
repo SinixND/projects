@@ -1,4 +1,4 @@
-build/src/cFrameMain.o: src/cFrameMain.cpp include/cFrameMain.h \
+build/src/cFrames.o: src/cFrame.cpp include/cFrameMain.h \
   /usr/include/wx-3.2/wx/wxprec.h /usr/include/wx-3.2/wx/defs.h \
   /usr/include/wx-3.2/wx/platform.h /usr/include/wx-3.2/wx/compiler.h \
   /usr/lib/wx/include/gtk3-unicode-3.2/wx/setup.h \
@@ -135,7 +135,7 @@ build/src/cFrameMain.o: src/cFrameMain.cpp include/cFrameMain.h \
   /usr/include/wx-3.2/wx/filectrl.h /usr/include/wx-3.2/wx/mdi.h \
   /usr/include/wx-3.2/wx/gtk/mdi.h
 
-include/cFrameMain.h:
+include/cFrames.h:
 
 /usr/include/wx-3.2/wx/wxprec.h:
 
