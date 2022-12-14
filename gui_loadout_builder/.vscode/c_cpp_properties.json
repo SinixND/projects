@@ -1,19 +1,16 @@
 {
     "configurations": [
         {
-            "name": "gcc default",
+            "name": "default",
             "includePath": [
-                "${default}",
-                "${workspaceFolder}",
-                "/usr/include",
-                "/usr/lib",
-                "/usr/include/linux"
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "/bin/g++",
             "cStandard": "c17",
             "cppStandard": "c++23",
-            "intelliSenseMode": "linux-gcc-x64"
+            "intelliSenseMode": "gcc-x64"
         }
     ],
     "version": 4
