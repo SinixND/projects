@@ -5,7 +5,7 @@ cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle,
 {
     //define an icon
     wxString cwd_Path  =  wxGetCwd();
-    SetIcon(wxIcon(wxGetCwd() + "/data/graphics/LoadoutBuilder.xpm"));
+    SetIcon(wxIcon(wxGetCwd() + "/data/graphics/LoadoutBuilder.ico"));
     Center();
 
     //setup menu bar
