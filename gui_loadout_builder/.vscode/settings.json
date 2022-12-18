@@ -7,6 +7,5 @@
             "binaryArgs": []
         }
     ],
-    "C_Cpp.errorSquiggles": "enabledIfIncludesResolve",
     "C_Cpp.intelliSenseEngineFallback": "enabled"
 }

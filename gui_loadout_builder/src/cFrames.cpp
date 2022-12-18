@@ -5,27 +5,35 @@ cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle,
 {
     //define an icon
     wxString cwd_Path  =  wxGetCwd();
-    SetIcon(wxIcon(cwd_Path + "/data/graphics/LoadoutBuilder.xpm"));
+    SetIcon(wxIcon(wxGetCwd() + "/data/graphics/LoadoutBuilder.xpm"));
     Center();
 
-    pm_menuFile = new wxMenu;
-    pm_menuFile->Append(wxID_EXIT);
- 
-    pm_menuHelp = new wxMenu;
-    pm_menuHelp->Append(wxID_ABOUT);
-
+    //setup menu bar
     pm_menuBar = new wxMenuBar;
-    pm_menuBar->Append(pm_menuFile, "&File");
-    pm_menuBar->Append(pm_menuHelp, "&Help");
-    
+    pm_menuTabFile = new wxMenu;
+    pm_menuTabFile->Append(ID_Hello, wxT("&Hello"));
+    pm_menuTabFile->AppendSeparator();
+    pm_menuTabFile->Append(wxID_EXIT, wxT("&Quit")); //no label necessary
+    pm_menuBar->Append(pm_menuTabFile, "&File");
+ 
+    pm_menuTabHelp = new wxMenu;
+    pm_menuTabHelp->Append(wxID_ABOUT, wxT("&About")); //no label necessary
+    pm_menuBar->Append(pm_menuTabHelp, "&Help");
+
     SetMenuBar(pm_menuBar);
-    
-    //define a connection 
-    //Connect(wxID_EXIT, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(cFrameMain::OnQuit));
 };
 
-//destructor
-cFrameMain::~cFrameMain()
+void cFrameMain::OnExitClicked(wxCommandEvent &WXUNUSED(event))
 {
-};
+    Close(true);
+}
 
+void cFrameMain::OnAboutClicked(wxCommandEvent &event)
+{
+    wxMessageBox("Content", "Frame title", wxOK | wxICON_INFORMATION);
+}
+
+void cFrameMain::OnHelloClicked(wxCommandEvent &event)
+{
+    wxLogMessage("Dialog Content");
+}

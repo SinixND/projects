@@ -1,28 +1,39 @@
 #ifndef _CFRAMES_H_
 #define _CFRAMES_H_
 
-#include <wx/wx.h>
+#include <wx/wxprec.h>
 
-//make a new frame class; must derive from wxFrame
+#ifndef WX_PRECOMP
+	#include <wx/wx.h>
+#endif
+
 class cFrameMain : public wxFrame
 {
 public:
-	//declare constructor with title parameter
 	cFrameMain(const wxString &rTitle);
 
 private:
+	wxDECLARE_EVENT_TABLE();
+
 	wxMenuBar *pm_menuBar;
-	wxMenu *pm_menuFile;
-	wxMenu *pm_menuHelp;
+	wxMenu *pm_menuTabFile;
+	wxMenu *pm_menuTabHelp;
 
-    //wxPanel *pm_panelItems;
-	//wxButton *pm_buttonChoose;
-
-    void OnExitClicked(wxCommandEvent &rEvent);
-    void OnAboutClicked(wxCommandEvent &rEvent);
-
-	//destructor
-	~cFrameMain();
+	void OnHelloClicked(wxCommandEvent &event);
+    void OnExitClicked(wxCommandEvent &event);
+    void OnAboutClicked(wxCommandEvent &event);
 };
+
+enum
+{
+	ID_Hello = 1
+};
+
+//define Event Table
+BEGIN_EVENT_TABLE(cFrameMain, wxFrame)
+    EVT_MENU(ID_Hello, cFrameMain::OnHelloClicked)
+    EVT_MENU(wxID_EXIT, cFrameMain::OnExitClicked)
+    EVT_MENU(wxID_ABOUT, cFrameMain::OnAboutClicked)
+END_EVENT_TABLE()
 
 #endif

@@ -1,24 +1,25 @@
-build/src/cApp.o: src/cApp.cpp include/cApp.h /usr/include/wx-3.2/wx/wx.h \
-  /usr/include/wx-3.2/wx/defs.h /usr/include/wx-3.2/wx/platform.h \
-  /usr/include/wx-3.2/wx/compiler.h \
+build/src/cApp.o: src/cApp.cpp include/cApp.h \
+  /usr/include/wx-3.2/wx/wxprec.h /usr/include/wx-3.2/wx/defs.h \
+  /usr/include/wx-3.2/wx/platform.h /usr/include/wx-3.2/wx/compiler.h \
   /usr/lib/wx/include/gtk3-unicode-3.2/wx/setup.h \
   /usr/include/wx-3.2/wx/chkconf.h /usr/include/wx-3.2/wx/gtk/chkconf.h \
   /usr/include/wx-3.2/wx/unix/chkconf.h /usr/include/wx-3.2/wx/version.h \
   /usr/include/wx-3.2/wx/cpp.h /usr/include/wx-3.2/wx/dlimpexp.h \
   /usr/include/wx-3.2/wx/types.h /usr/include/wx-3.2/wx/debug.h \
   /usr/include/wx-3.2/wx/chartype.h /usr/include/wx-3.2/wx/features.h \
-  /usr/include/wx-3.2/wx/object.h /usr/include/wx-3.2/wx/memory.h \
-  /usr/include/wx-3.2/wx/string.h /usr/include/wx-3.2/wx/wxcrtbase.h \
-  /usr/include/wx-3.2/wx/strvararg.h /usr/include/wx-3.2/wx/strconv.h \
-  /usr/include/wx-3.2/wx/buffer.h /usr/include/wx-3.2/wx/fontenc.h \
-  /usr/include/wx-3.2/wx/unichar.h /usr/include/wx-3.2/wx/stringimpl.h \
-  /usr/include/wx-3.2/wx/beforestd.h /usr/include/wx-3.2/wx/afterstd.h \
-  /usr/include/wx-3.2/wx/stringops.h /usr/include/wx-3.2/wx/iosfwrap.h \
-  /usr/include/wx-3.2/wx/msgout.h /usr/include/wx-3.2/wx/xti.h \
-  /usr/include/wx-3.2/wx/rtti.h /usr/include/wx-3.2/wx/flags.h \
-  /usr/include/wx-3.2/wx/xti2.h /usr/include/wx-3.2/wx/dynarray.h \
-  /usr/include/wx-3.2/wx/vector.h /usr/include/wx-3.2/wx/scopeguard.h \
-  /usr/include/wx-3.2/wx/except.h /usr/include/wx-3.2/wx/meta/movable.h \
+  /usr/include/wx-3.2/wx/wx.h /usr/include/wx-3.2/wx/object.h \
+  /usr/include/wx-3.2/wx/memory.h /usr/include/wx-3.2/wx/string.h \
+  /usr/include/wx-3.2/wx/wxcrtbase.h /usr/include/wx-3.2/wx/strvararg.h \
+  /usr/include/wx-3.2/wx/strconv.h /usr/include/wx-3.2/wx/buffer.h \
+  /usr/include/wx-3.2/wx/fontenc.h /usr/include/wx-3.2/wx/unichar.h \
+  /usr/include/wx-3.2/wx/stringimpl.h /usr/include/wx-3.2/wx/beforestd.h \
+  /usr/include/wx-3.2/wx/afterstd.h /usr/include/wx-3.2/wx/stringops.h \
+  /usr/include/wx-3.2/wx/iosfwrap.h /usr/include/wx-3.2/wx/msgout.h \
+  /usr/include/wx-3.2/wx/xti.h /usr/include/wx-3.2/wx/rtti.h \
+  /usr/include/wx-3.2/wx/flags.h /usr/include/wx-3.2/wx/xti2.h \
+  /usr/include/wx-3.2/wx/dynarray.h /usr/include/wx-3.2/wx/vector.h \
+  /usr/include/wx-3.2/wx/scopeguard.h /usr/include/wx-3.2/wx/except.h \
+  /usr/include/wx-3.2/wx/meta/movable.h \
   /usr/include/wx-3.2/wx/meta/pod.h /usr/include/wx-3.2/wx/meta/if.h \
   /usr/include/wx-3.2/wx/list.h /usr/include/wx-3.2/wx/hash.h \
   /usr/include/wx-3.2/wx/hashmap.h /usr/include/wx-3.2/wx/wxcrt.h \
@@ -136,7 +137,7 @@ build/src/cApp.o: src/cApp.cpp include/cApp.h /usr/include/wx-3.2/wx/wx.h \
 
 include/cApp.h:
 
-/usr/include/wx-3.2/wx/wx.h:
+/usr/include/wx-3.2/wx/wxprec.h:
 
 /usr/include/wx-3.2/wx/defs.h:
 
@@ -165,6 +166,8 @@ include/cApp.h:
 /usr/include/wx-3.2/wx/chartype.h:
 
 /usr/include/wx-3.2/wx/features.h:
+
+/usr/include/wx-3.2/wx/wx.h:
 
 /usr/include/wx-3.2/wx/object.h:
 

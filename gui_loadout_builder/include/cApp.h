@@ -1,13 +1,15 @@
 #ifndef _CAPP_H_
 #define _CAPP_H_
 
-#include <wx/wx.h>
+#include <wx/wxprec.h>
 
-//make a new application class; must derive from wxApp
+#ifndef WX_PRECOMP
+	#include <wx/wx.h>
+#endif
+
 class cApp : public wxApp
 {
 public:
-	//declare app's initialisation which runs the class and keeps active when true
 	virtual bool OnInit();
 };
 
