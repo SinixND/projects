@@ -3,7 +3,7 @@
 	$^ (all prerequesites, all right of :) 
 # $(TARGET) depends on $(OBJ_FILES) to be build/linked; make looks for a rule to bulid $(OBJ_FILES)
 
-CXX := clang++ #g++ 
+CXX := g++ #clang++ 
 TARGET := main
 SRC_EXT := cpp
 OBJ_EXT := o
@@ -42,6 +42,7 @@ run: build
 	$(BIN_DIR)/$(TARGET)
 
 build: $(BIN_DIR)/$(TARGET)
+
 # link command
 $(BIN_DIR)/$(TARGET): $(OBJ_FILES)
 	mkdir -p $(@D)
@@ -51,7 +52,6 @@ $(BIN_DIR)/$(TARGET): $(OBJ_FILES)
 $(OBJ_DIR)/%.$(OBJ_EXT): %.$(SRC_EXT)
 	mkdir -p $(@D)
 	$(CXX) $(CXX_FLAGS) $(INC_FLAGS) -c $< -o $@ #$(INC_FLAGS)
-
 
 clean:  
 	rm -rf $(BIN_DIR) $(OBJ_DIR)
