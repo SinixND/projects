@@ -7,33 +7,30 @@
 	#include <wx/wx.h>
 #endif
 
+// declare main frame class
 class cFrameMain : public wxFrame
 {
 public:
+	// constructor
 	cFrameMain(const wxString &rTitle);
 
-private:
-	wxDECLARE_EVENT_TABLE();
-
 	wxMenuBar *pm_menuBar;
-	wxMenu *pm_menuTabFile;
-	wxMenu *pm_menuTabHelp;
+	wxMenu *pm_menuFile;
+	wxMenu *pm_menuHelp;
 
-	void OnHelloClicked(wxCommandEvent &event);
-    void OnExitClicked(wxCommandEvent &event);
-    void OnAboutClicked(wxCommandEvent &event);
+	// event handlers
+	void OnHello(wxCommandEvent &event);
+    void OnQuit(wxCommandEvent &event);
+    void OnAbout(wxCommandEvent &event);
+
+private:
+	// this class handles events
+	wxDECLARE_EVENT_TABLE();
 };
 
 enum
 {
 	ID_Hello = 1
 };
-
-//define Event Table
-BEGIN_EVENT_TABLE(cFrameMain, wxFrame)
-    EVT_MENU(ID_Hello, cFrameMain::OnHelloClicked)
-    EVT_MENU(wxID_EXIT, cFrameMain::OnExitClicked)
-    EVT_MENU(wxID_ABOUT, cFrameMain::OnAboutClicked)
-END_EVENT_TABLE()
 
 #endif

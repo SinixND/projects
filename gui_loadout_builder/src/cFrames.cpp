@@ -1,39 +1,59 @@
 #include "cFrames.h"
 
-//define constructor
+// constructor of main frame
 cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, wxDefaultPosition, wxSize(640, 320))
 {
-    //define an icon
+    // set the frames icon
     wxString cwd_Path  =  wxGetCwd();
-    SetIcon(wxIcon(wxGetCwd() + "/data/graphics/LoadoutBuilder.ico"));
+    SetIcon(wxIcon(wxGetCwd() + "/data/graphics/LoadoutBuilder.xpm"));
     Center();
 
-    //setup menu bar
+    // create a menu bar
     pm_menuBar = new wxMenuBar;
-    pm_menuTabFile = new wxMenu;
-    pm_menuTabFile->Append(ID_Hello, wxT("&Hello"));
-    pm_menuTabFile->AppendSeparator();
-    pm_menuTabFile->Append(wxID_EXIT, wxT("&Quit")); //no label necessary
-    pm_menuBar->Append(pm_menuTabFile, "&File");
- 
-    pm_menuTabHelp = new wxMenu;
-    pm_menuTabHelp->Append(wxID_ABOUT, wxT("&About")); //no label necessary
-    pm_menuBar->Append(pm_menuTabHelp, "&Help");
+    
+    // create a menus
+    pm_menuFile = new wxMenu;
+    pm_menuHelp = new wxMenu;
 
+    // append entries to the menus
+    pm_menuFile->Append(ID_Hello, wxT("&New"), wxT("Clear loadout"));
+    pm_menuFile->Append(ID_Hello, wxT("&Open"), wxT("Open a saved loadout"));
+    pm_menuFile->Append(ID_Hello, wxT("&Save", wxT("Save current loadout")));
+    pm_menuFile->Append(ID_Hello, wxT("&Save As"), wxT("Save a new loadout"));
+    pm_menuFile->AppendSeparator();
+    pm_menuFile->Append(wxID_EXIT, wxT("&Quit"), wxT("Exit the program")); //no label necessary
+    pm_menuHelp->Append(wxID_ABOUT, wxT("&About"), wxT("Show the About Information")); //no label necessary
+
+    // append the menus to the menu bar
+    pm_menuBar->Append(pm_menuFile, "&File");
+    pm_menuBar->Append(pm_menuHelp, "&Help");
+
+    // attach menu bar to the frame
     SetMenuBar(pm_menuBar);
+
+    // create a status bar
+    CreateStatusBar();
+    SetStatusText("Additional information displayed here");
 };
 
-void cFrameMain::OnExitClicked(wxCommandEvent &WXUNUSED(event))
+void cFrameMain::OnQuit(wxCommandEvent &WXUNUSED(event))
 {
     Close(true);
 }
 
-void cFrameMain::OnAboutClicked(wxCommandEvent &event)
+void cFrameMain::OnAbout(wxCommandEvent &event)
 {
     wxMessageBox("Content", "Frame title", wxOK | wxICON_INFORMATION);
 }
 
-void cFrameMain::OnHelloClicked(wxCommandEvent &event)
+void cFrameMain::OnHello(wxCommandEvent &event)
 {
     wxLogMessage("Dialog Content");
 }
+
+// event table for the main frame
+BEGIN_EVENT_TABLE(cFrameMain, wxFrame)
+    EVT_MENU(ID_Hello, cFrameMain::OnHello)
+    EVT_MENU(wxID_EXIT, cFrameMain::OnQuit)
+    EVT_MENU(wxID_ABOUT, cFrameMain::OnAbout)
+END_EVENT_TABLE()
