@@ -1,13 +1,13 @@
-#include "cApp.h"
-#include "cFrames.h"
+#include "App.h"
+#include "Frames.h"
 
 // create instance of application 
-wxIMPLEMENT_APP(cApp);
+wxIMPLEMENT_APP(App);
 
-bool cApp::OnInit()
+bool App::OnInit()
 {
     // create main application window
-    cFrameMain *pm_FrameMain = new cFrameMain("MAIN-WINDOW-TITLE");
+    FrameMain *pm_FrameMain = new FrameMain("MAIN-WINDOW-TITLE");
 
     // show it
     pm_FrameMain->Show(true);

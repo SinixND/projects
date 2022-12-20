@@ -1,7 +1,7 @@
-#include "cFrames.h"
+#include "Frames.h"
 
 // constructor of main frame
-cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, wxDefaultPosition, wxSize(640, 320))
+FrameMain::FrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, wxDefaultPosition, wxSize(640, 320))
 {
     // set the frames icon
     wxString cwd_Path  =  wxGetCwd();
@@ -16,10 +16,10 @@ cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle,
     pm_menuHelp = new wxMenu;
 
     // append entries to the menus
-    pm_menuFile->Append(ID_Hello, wxT("&New/tStrg-N"), wxT("Clear loadout"));
-    pm_menuFile->Append(ID_Hello, wxT("&Open/tStrg-O"), wxT("Open a saved loadout"));
-    pm_menuFile->Append(ID_Hello, wxT("Save/tStrg-S", wxT("Save current loadout")));
-    pm_menuFile->Append(ID_Hello, wxT("&Save As/tStrg-Shift-S"), wxT("Save a new loadout"));
+    pm_menuFile->Append(ID_MENU_NEW, wxT("&New/tStrg-N"), wxT("Clear loadout"));
+    pm_menuFile->Append(ID_MENU_OPEN, wxT("&Open/tStrg-O"), wxT("Open a saved loadout"));
+    pm_menuFile->Append(ID_MENU_SAVE, wxT("Save/tStrg-S", wxT("Save current loadout")));
+    pm_menuFile->Append(ID_MENU_SAVE_AS, wxT("&Save As/tStrg-Shift-S"), wxT("Save a new loadout"));
     pm_menuFile->AppendSeparator();
     pm_menuFile->Append(wxID_EXIT, wxT("E&xit/tStrg-Q"), wxT("Exit the program")); //no label necessary
     pm_menuHelp->Append(wxID_ABOUT, wxT("&About..."), wxT("Show the About Information")); //no label necessary
@@ -37,24 +37,27 @@ cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle,
     SetStatusText("Additional information displayed here");
 };
 
-void cFrameMain::OnQuit(wxCommandEvent &WXUNUSED(event))
+void FrameMain::OnQuit(wxCommandEvent &WXUNUSED(event))
 {
     Close(true);
 }
 
-void cFrameMain::OnAbout(wxCommandEvent &event)
+void FrameMain::OnAbout(wxCommandEvent &event)
 {
     wxMessageBox("Content", "Frame title", wxOK | wxICON_INFORMATION);
 }
 
-void cFrameMain::OnHello(wxCommandEvent &event)
+void FrameMain::OnMYEVENT(wxCommandEvent &event)
 {
     wxLogMessage("Dialog Content");
 }
 
 // event table for the main frame
-BEGIN_EVENT_TABLE(cFrameMain, wxFrame)
-    EVT_MENU(ID_Hello, cFrameMain::OnHello)
-    EVT_MENU(wxID_EXIT, cFrameMain::OnQuit)
-    EVT_MENU(wxID_ABOUT, cFrameMain::OnAbout)
+bind(ID_MYEVENT, FrameMain::OnMYEVENT)
+/*
+BEGIN_EVENT_TABLE(FrameMain, wxFrame)
+    EVT_MENU(ID_MYEVENT, FrameMain::OnMYEVENT)
+    EVT_MENU(wxID_EXIT, FrameMain::OnQuit)
+    EVT_MENU(wxID_ABOUT, FrameMain::OnAbout)
 END_EVENT_TABLE()
+*/

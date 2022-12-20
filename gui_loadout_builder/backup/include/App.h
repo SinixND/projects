@@ -1,14 +1,14 @@
-#ifndef _CAPP_H_
-#define _CAPP_H_
+#ifndef _APP_H_
+#define _APP_H_
 
 #include <wx/wxprec.h>
 
 #ifndef WX_PRECOMP
 	#include <wx/wx.h>
-#endif
+#endif //WX_PRECOMP
 
 // declare the application class
-class cApp : public wxApp
+class App : public wxApp
 {
 public:
 	// called on application startup
