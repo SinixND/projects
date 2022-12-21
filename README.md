@@ -1,32 +1,26 @@
 GENERAL NAMING CONVENTION:
+--------------------------
 
-Member Attributes: mClassMemberAttribute 
+- Member Attributes: mClassMemberAttribute 
+- Pointers: pPointerVar
+- Reference: rReferenceVar
+- Constants: CONST_VAR
 
-Pointers: pPointerVar
+GIT COMMANDS:
+-------------
 
-Reference: rReferenceVar
-
-Constants: CONST_VAR
-
-
-GIT PUSH:
-
+- GIT PUSH:
 git add. && git commit -m "msg" -a && git push -vf
 
-
-GIT PULL:
-
+- GIT PULL:
 git fetch --all && git reset --hard origin/main
 
-
-GIT CHANGE REPO-NAME:
-
+- GIT CHANGE REPO-NAME:
 git remote set-url origin https://URL
 
+JULIA COMMANDS:
+---------------
 
-Julia arguments:
-
+- Julia arguments:
 julia --threads=auto
 
-
-make clean && bear -- make
