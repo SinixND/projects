@@ -1,14 +1,12 @@
 GENERAL NAMING CONVENTION:
 
-Member Attributes: mClassAttribute 
+Member Attributes: mClassMemberAttribute 
 
-Pointers: pPointer
+Pointers: pPointerVar
 
 Reference: rReferenceVar
 
 Constants: CONST_VAR
-
-Macros: (_MYCLASS_H_)
 
 
 GIT PUSH:

@@ -6,6 +6,11 @@
 //////// names. No file separation needed. From my expirience 
 //////// application declaration and implementation have to be at the
 //////// end for single file GUIs.
+//////// I used the following naming conventions:
+i/////// - Member Attributes: mClassMemberAttribute
+//////// - Pointers: pPointerVar
+//////// - Reference: rReferenceVar
+//////// - Constants: CONST_VAR
 //////// =============================================================
 //////// =============================================================
 
