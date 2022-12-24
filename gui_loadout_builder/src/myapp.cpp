@@ -43,6 +43,7 @@ public:
 	wxMenu *pm_menuFile;
 	wxMenu *pm_menuHelp;
 
+private:
 	// event handlers
 	void OnMyTest(wxCommandEvent &event);
 };
