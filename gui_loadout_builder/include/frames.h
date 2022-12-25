@@ -12,12 +12,16 @@ public:
 	// constructor
 	FrameMain(const wxString &rTitle);
 
+    // menu bar
 	wxMenuBar *pm_menuBar;
 	wxMenu *pm_menuFile;
 	wxMenu *pm_menuHelp;
 
+    // panels
+    wxPanel *pPanelFirst;
+
 private:
-	// event handlers
+	// event functions
 	void OnMyTest(wxCommandEvent &event);
 };
 
