@@ -1,7 +1,10 @@
 #include <app.h>
+#include <frames.h>
 
 wxIMPLEMENT_APP( App );
 
-bool OnInit(){
+bool App::OnInit(){
+    FrameMain *pFrameMain = new FrameMain( "FrameMain Title" );
+    pFrameMain->Show( true ); 
     return true;
 }
