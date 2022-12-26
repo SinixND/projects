@@ -5,7 +5,6 @@
 
 #ifndef WX_PRECOMP
 	#include <wx/wx.h>
-	#include <wx/wrapsizer.h>
 #endif //WX_PRECOMP
 
 class FrameMain : public wxFrame{
@@ -20,16 +19,16 @@ private:
 	wxMenu *pm_menuHelp;
 
     // panels
-    wxPanel *pPanelMain;
-    wxPanel *pPMLeft;
-    wxPanel *pPMRight;
+    wxPanel *pPanelFrameMain;
+    wxPanel *pPFMItems;
+    wxPanel *pPFMStats;
 
 	// buttons
 	wxButton *pButtonOpenDialog;
 
 	// sizers
-	wxBoxSizer *pSizerPanelMain;
-	wxBoxSizer *pSizerPMLeft;
+	wxBoxSizer *pSizerPanelFrameMain;
+	wxBoxSizer *pSizerPFMItems;
 
 	// functions
 	void OnMyTest( wxCommandEvent &event );

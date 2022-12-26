@@ -32,28 +32,28 @@ FrameMain::FrameMain( const wxString &rTitle ) : wxFrame( NULL, wxID_ANY, rTitle
         SetStatusText( "Additional information displayed here" );
 
     // panels
-    pPanelMain = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize );
+    pPanelFrameMain = new wxPanel( this );
 
-    pPMLeft = new wxPanel( pPanelMain, wxID_ANY, wxDefaultPosition, wxDefaultSize );
-        pPMLeft->SetBackgroundColour( wxColor( 100, 100, 200 ));
+    pPFMItems = new wxPanel( pPanelFrameMain );
+        pPFMItems->SetBackgroundColour( wxColor( 100, 100, 200 ));
 
-    pPMRight = new wxPanel( pPanelMain, wxID_ANY, wxDefaultPosition, wxDefaultSize );
-        pPMRight->SetBackgroundColour( wxColor( 100, 200, 100 ));
+    pPFMStats = new wxPanel( pPanelFrameMain );
+        pPFMStats->SetBackgroundColour( wxColor( 100, 200, 100 ));
 
     // buttons
-	pButtonOpenDialog = new wxButton(  pPMLeft, ID_BUTTON_OPEN_DIALOG, wxT(  "ClickMe"  ) );
+	pButtonOpenDialog = new wxButton( pPFMItems, ID_BUTTON_OPEN_DIALOG, wxT( "ClickMe" ));
 
     // sizers
-    pSizerPanelMain = new wxBoxSizer( wxHORIZONTAL );
-        pPanelMain->SetSizerAndFit( pSizerPanelMain );
-        pSizerPanelMain->Add( pPMLeft, 1, wxEXPAND );
-        pSizerPanelMain->Add( pPMRight, 2, wxEXPAND );
+    pSizerPanelFrameMain = new wxBoxSizer( wxHORIZONTAL );
+        pPanelFrameMain->SetSizerAndFit( pSizerPanelFrameMain );
+        pSizerPanelFrameMain->Add( pPFMItems, 1, wxEXPAND );
+        pSizerPanelFrameMain->Add( pPFMStats, 2, wxEXPAND );
 
-    pSizerPMLeft = new wxBoxSizer( wxHORIZONTAL );
-        pPMLeft->SetSizerAndFit( pSizerPMLeft );
-        pSizerPMLeft->AddStretchSpacer(1);
-        pSizerPMLeft->Add( pButtonOpenDialog, 1, wxALIGN_CENTER );
-        pSizerPMLeft->AddStretchSpacer(1);
+    pSizerPFMItems = new wxBoxSizer( wxHORIZONTAL );
+        pPFMItems->SetSizerAndFit( pSizerPFMItems );
+        pSizerPFMItems->AddStretchSpacer( 1 );
+        pSizerPFMItems->Add( pButtonOpenDialog, 1, wxALIGN_CENTER );
+        pSizerPFMItems->AddStretchSpacer( 1 );
     
     // event handlers
     Bind( wxEVT_MENU, [ = ]( wxCommandEvent& ){ 

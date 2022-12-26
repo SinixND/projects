@@ -126,7 +126,7 @@ build/src/app.o: src/app.cpp include/app.h \
  /usr/include/wx-3.2/wx/gtk/filedlg.h \
  /usr/include/wx-3.2/wx/gtk/filectrl.h /usr/include/wx-3.2/wx/filectrl.h \
  /usr/include/wx-3.2/wx/mdi.h /usr/include/wx-3.2/wx/gtk/mdi.h \
- include/frames.h /usr/include/wx-3.2/wx/wrapsizer.h include/dialogs.h
+ include/frames.h include/dialogs.h
 include/app.h:
 /usr/include/wx-3.2/wx/wxprec.h:
 /usr/include/wx-3.2/wx/defs.h:
@@ -357,5 +357,4 @@ include/app.h:
 /usr/include/wx-3.2/wx/mdi.h:
 /usr/include/wx-3.2/wx/gtk/mdi.h:
 include/frames.h:
-/usr/include/wx-3.2/wx/wrapsizer.h:
 include/dialogs.h:
