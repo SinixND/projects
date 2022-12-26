@@ -4,7 +4,6 @@ FrameMain::FrameMain( const wxString &rTitle ) : wxFrame( NULL, wxID_ANY, rTitle
     // set the frames icon
     wxString cwd_Path  =  wxGetCwd();
     SetIcon( wxIcon( wxGetCwd() + "/data/graphics/LoadoutBuilder.xpm" ));
-    Center();
 
     // menu bar
     pm_menuBar = new wxMenuBar;
@@ -30,24 +29,32 @@ FrameMain::FrameMain( const wxString &rTitle ) : wxFrame( NULL, wxID_ANY, rTitle
 
     // status bar
     CreateStatusBar( 1 );
-    SetStatusText( "Additional information displayed here" );
+        SetStatusText( "Additional information displayed here" );
 
     // panels
     pPanelMain = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize );
 
-    pPanelLeft = new wxPanel( pPanelMain, wxID_ANY, wxDefaultPosition, wxDefaultSize );
-    pPanelLeft->SetBackgroundColour( wxColor( 100, 100, 200 ));
+    pPMLeft = new wxPanel( pPanelMain, wxID_ANY, wxDefaultPosition, wxDefaultSize );
+        pPMLeft->SetBackgroundColour( wxColor( 100, 100, 200 ));
 
-    pPanelRight = new wxPanel( pPanelMain, wxID_ANY, wxDefaultPosition, wxDefaultSize );
-    pPanelRight->SetBackgroundColour( wxColor( 100, 200, 100 ));
+    pPMRight = new wxPanel( pPanelMain, wxID_ANY, wxDefaultPosition, wxDefaultSize );
+        pPMRight->SetBackgroundColour( wxColor( 100, 200, 100 ));
+
+    // buttons
+	pButtonOpenDialog = new wxButton(  pPMLeft, ID_BUTTON_OPEN_DIALOG, wxT(  "ClickMe"  ) );
 
     // sizers
-    pBoxSizer = new wxBoxSizer( wxHORIZONTAL );
-    pBoxSizer->Add( pPanelLeft, 1, wxEXPAND );
-    pBoxSizer->Add( pPanelRight, 2, wxEXPAND );
-    
-    pPanelMain->SetSizerAndFit( pBoxSizer );
+    pSizerPanelMain = new wxBoxSizer( wxHORIZONTAL );
+        pPanelMain->SetSizerAndFit( pSizerPanelMain );
+        pSizerPanelMain->Add( pPMLeft, 1, wxEXPAND );
+        pSizerPanelMain->Add( pPMRight, 2, wxEXPAND );
 
+    pSizerPMLeft = new wxBoxSizer( wxHORIZONTAL );
+        pPMLeft->SetSizerAndFit( pSizerPMLeft );
+        pSizerPMLeft->AddStretchSpacer(1);
+        pSizerPMLeft->Add( pButtonOpenDialog, 1, wxALIGN_CENTER );
+        pSizerPMLeft->AddStretchSpacer(1);
+    
     // event handlers
     Bind( wxEVT_MENU, [ = ]( wxCommandEvent& ){ 
         Close( true ); 
@@ -58,10 +65,9 @@ FrameMain::FrameMain( const wxString &rTitle ) : wxFrame( NULL, wxID_ANY, rTitle
     }, wxID_ABOUT );
 
     Bind( wxEVT_MENU, &FrameMain::OnMyTest, this, ID_MENU_TEST ); 
-
 };
 
-// event functions
+// functions
 void FrameMain::OnMyTest( wxCommandEvent &event ){
     wxLogMessage( "Dialog Content" );
 };

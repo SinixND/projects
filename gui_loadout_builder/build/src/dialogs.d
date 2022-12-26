@@ -1,4 +1,4 @@
-build/src/frames.o: src/frames.cpp include/frames.h \
+build/src/dialogs.o: src/dialogs.cpp include/dialogs.h \
  /usr/include/wx-3.2/wx/wxprec.h /usr/include/wx-3.2/wx/defs.h \
  /usr/include/wx-3.2/wx/platform.h /usr/include/wx-3.2/wx/compiler.h \
  /usr/lib/wx/include/gtk3-unicode-3.2/wx/setup.h \
@@ -125,9 +125,8 @@ build/src/frames.o: src/frames.cpp include/frames.h \
  /usr/include/wx-3.2/wx/valtext.h /usr/include/wx-3.2/wx/filedlg.h \
  /usr/include/wx-3.2/wx/gtk/filedlg.h \
  /usr/include/wx-3.2/wx/gtk/filectrl.h /usr/include/wx-3.2/wx/filectrl.h \
- /usr/include/wx-3.2/wx/mdi.h /usr/include/wx-3.2/wx/gtk/mdi.h \
- /usr/include/wx-3.2/wx/wrapsizer.h
-include/frames.h:
+ /usr/include/wx-3.2/wx/mdi.h /usr/include/wx-3.2/wx/gtk/mdi.h
+include/dialogs.h:
 /usr/include/wx-3.2/wx/wxprec.h:
 /usr/include/wx-3.2/wx/defs.h:
 /usr/include/wx-3.2/wx/platform.h:
@@ -356,4 +355,3 @@ include/frames.h:
 /usr/include/wx-3.2/wx/filectrl.h:
 /usr/include/wx-3.2/wx/mdi.h:
 /usr/include/wx-3.2/wx/gtk/mdi.h:
-/usr/include/wx-3.2/wx/wrapsizer.h:
