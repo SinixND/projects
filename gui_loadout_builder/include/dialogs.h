@@ -14,15 +14,15 @@ public:
 private:
     // panels
     wxPanel *pPanelDialogMain;
-    wxPanel *pPDMUpper;
-    wxPanel *pPDMButtons;
+    wxPanel *pPanelDMUpper;
+    wxPanel *pPanelDMButtons;
 
     // buttons
     wxButton *pButtonApply;
     //wxButton *pButtonCancel;
 
     // sizers
-    wxBoxSizer *pSizerPanelDialogMain;
+    wxBoxSizer *pSizerPDialogMain;
     wxBoxSizer *pSizerPDMButtons;
 };
 
