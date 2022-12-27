@@ -7,40 +7,48 @@
 	#include <wx/wx.h>
 #endif //WX_PRECOMP
 
+#include "dialogs.h"
+
 class FrameMain : public wxFrame{
 public:
 	// constructor
-	FrameMain( const wxString &rTitle );
+	FrameMain(const wxString &rTitle);
 
 private:
+	// dialogs
+	DialogMain *pDialogMain;
+
     // menu bar
 	wxMenuBar *pm_menuBar;
 	wxMenu *pm_menuFile;
 	wxMenu *pm_menuHelp;
 
     // panels
-    wxPanel *pPanelFrameMain;
-    wxPanel *pPFMItems;
-    wxPanel *pPFMStats;
+    wxPanel *pPanelFMain;
+	wxPanel *pPanelFMButtons;
+	wxPanel *pPanelFMContents;
+    wxPanel *pPanelFMCItems;
+    wxPanel *pPanelFMCStats;
 
 	// buttons
-	wxButton *pButtonOpenDialog;
+	wxButton *pButtonClear;
+    wxButton *pButtonExit;
+	wxButton *pButtonOpenDialogMain;
 
 	// sizers
-	wxBoxSizer *pSizerPanelFrameMain;
-	wxBoxSizer *pSizerPFMItems;
+	wxSizer *pSizerPFMain;
+	wxSizer *pSizerPFMButtons;
+	wxSizer *pSizerPFMContents;
+	wxSizer *pSizerPFMCItems;
 
 	// functions
-	void OnMyTest( wxCommandEvent &event );
+	void OnMenuTest(wxCommandEvent &event);
 };
 
 // IDs
 enum{
-	ID_BUTTON_OPEN_DIALOG = wxID_HIGHEST,
-	ID_MENU_SAVE_AS = wxID_HIGHEST,
-	ID_MENU_SAVE = wxID_HIGHEST,
-	ID_MENU_OPEN = wxID_HIGHEST,
-	ID_MENU_NEW = wxID_HIGHEST,
+	ID_BUTTON_OPEN_DIALOGMAIN = wxID_HIGHEST,
+	ID_BUTTON_CLEAR = wxID_HIGHEST,
 	ID_MENU_TEST = wxID_HIGHEST
 };
 

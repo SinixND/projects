@@ -9,21 +9,21 @@
 
 class DialogMain : public wxDialog{
 public:
-    DialogMain( const wxString &rTitle );
+    DialogMain(const wxString &rTitle);
 
 private:
     // panels
-    wxPanel *pPanelDialogMain;
-    wxPanel *pPanelDMUpper;
+    wxPanel *pPanelDMain;
     wxPanel *pPanelDMButtons;
+    wxPanel *pPanelDMContents;
 
     // buttons
-    wxButton *pButtonApply;
-    //wxButton *pButtonCancel;
+    wxButton *pButtonOk;
+    wxButton *pButtonCancel;
 
     // sizers
-    wxBoxSizer *pSizerPDialogMain;
-    wxBoxSizer *pSizerPDMButtons;
+    wxSizer *pSizerPDMain;
+    wxSizer *pSizerPDMButtons;
 };
 
 #endif //_DIALOGS_H_
