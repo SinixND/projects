@@ -22,21 +22,23 @@ private:
 
     // panels
     wxPanel *pPanelFMain;
-	wxPanel *pPanelFMButtons;
 	wxPanel *pPanelFMContents;
+	wxPanel *pPanelFMButtons;
     wxPanel *pPanelFMCItems;
     wxPanel *pPanelFMCStats;
+	wxPanel *pPanelFMCISpecialisation;
 
 	// buttons
-	wxButton *pButtonClear;
-    wxButton *pButtonExit;
-	wxButton *pButtonOpenDialogMain;
+    wxButton *pButtonPFMBExit;
+	wxButton *pButtonPFMBClear;
+	wxButton *pButtonPFMCISpecialisation;
 
 	// sizers
 	wxSizer *pSizerPFMain;
-	wxSizer *pSizerPFMButtons;
 	wxSizer *pSizerPFMContents;
+	wxSizer *pSizerPFMButtons;
 	wxSizer *pSizerPFMCItems;
+	wxSizer *pSizerPFMCISpecialisation;
 
 	// functions
 	void OnMenuTest(wxCommandEvent &event);
@@ -44,7 +46,7 @@ private:
 
 // IDs
 enum{
-	ID_BUTTON_OPEN_DIALOGMAIN,
+	ID_BUTTON_PFMCI_SPECIALISATION,
 	ID_BUTTON_CLEAR,
 	ID_MENU_TEST
 };

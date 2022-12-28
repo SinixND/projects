@@ -14,15 +14,24 @@ public:
 private:
     // panels
     wxPanel *pPanelDMain;
-    wxPanel *pPanelDMButtons;
     wxPanel *pPanelDMContents;
+    wxPanel *pPanelDMButtons;
+    wxPanel *pPanelDMCSelect;
+    wxPanel *pPanelDMCFilter;
 
     // buttons
-    wxButton *pButtonOk;
+    wxButton *pButtonPDMBOk;
 
     // sizers
     wxSizer *pSizerPDMain;
     wxSizer *pSizerPDMButtons;
+    wxSizer *pSizerPDMContents;
+    wxSizer *pSizerPDMCSelect;
+};
+
+// IDs
+enum{
+	ID_COMBOBOX_PDMC_SELECT
 };
 
 #endif //_DIALOGS_H_

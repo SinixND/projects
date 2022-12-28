@@ -40,10 +40,13 @@ FrameMain::FrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, w
     pPanelFMCStats = new wxPanel(pPanelFMContents);
         pPanelFMCStats->SetBackgroundColour(wxColor(200, 200, 100));
 
+    pPanelFMCISpecialisation = new wxPanel(pPanelFMCItems);
+        pPanelFMCISpecialisation->SetBackgroundColour(wxColor(100, 200, 200));
+
     // buttons
-	pButtonExit = new wxButton(pPanelFMButtons, wxID_EXIT, wxT("Exit"));
-	pButtonClear = new wxButton(pPanelFMButtons, ID_BUTTON_CLEAR, wxT("Clear"));
-    pButtonOpenDialogMain = new wxButton(pPanelFMCItems, ID_BUTTON_OPEN_DIALOGMAIN, wxT("Open dialog main"));
+	pButtonPFMBExit = new wxButton(pPanelFMButtons, wxID_EXIT, wxT("Exit"));
+	pButtonPFMBClear = new wxButton(pPanelFMButtons, ID_BUTTON_CLEAR, wxT("Clear"));
+    pButtonPFMCISpecialisation = new wxButton(pPanelFMCISpecialisation, ID_BUTTON_PFMCI_SPECIALISATION, wxT("Specialisation"));
 
     // sizers
     pSizerPFMain = new wxBoxSizer(wxVERTICAL);
@@ -54,19 +57,23 @@ FrameMain::FrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, w
     pSizerPFMButtons = new wxBoxSizer(wxHORIZONTAL);
         pPanelFMButtons->SetSizer(pSizerPFMButtons);
         pSizerPFMButtons->AddStretchSpacer(1);
-        pSizerPFMButtons->Add(pButtonClear, wxSizerFlags(0).Border(wxALL, 5));
-        pSizerPFMButtons->Add(pButtonExit, wxSizerFlags(0).Border(wxALL, 5));
+        pSizerPFMButtons->Add(pButtonPFMBClear, wxSizerFlags(0).Border(wxALL, 5));
+        pSizerPFMButtons->Add(pButtonPFMBExit, wxSizerFlags(0).Border(wxALL, 5));
         
     pSizerPFMContents = new wxBoxSizer(wxHORIZONTAL);
         pPanelFMContents->SetSizer(pSizerPFMContents);
         pSizerPFMContents->Add(pPanelFMCItems, wxSizerFlags(1).Expand().Border(wxALL, 5));
         pSizerPFMContents->Add(pPanelFMCStats, wxSizerFlags(1).Expand().Border(wxALL, 5));
 
-    pSizerPFMCItems = new wxBoxSizer(wxHORIZONTAL);
+    pSizerPFMCItems = new wxBoxSizer(wxVERTICAL);
         pPanelFMCItems->SetSizer(pSizerPFMCItems);
+        pSizerPFMCItems->Add(pPanelFMCISpecialisation, wxSizerFlags(0).Expand().Border(wxALL, 5));
         pSizerPFMCItems->AddStretchSpacer(1);
-        pSizerPFMCItems->Add(pButtonOpenDialogMain, wxSizerFlags(0).CenterVertical().Border(wxALL, 5));
-        pSizerPFMCItems->AddStretchSpacer(1);
+
+    pSizerPFMCISpecialisation = new wxBoxSizer(wxHORIZONTAL);
+        pPanelFMCISpecialisation->SetSizer(pSizerPFMCISpecialisation);
+        pSizerPFMCISpecialisation->Add(pButtonPFMCISpecialisation, wxSizerFlags(0).Expand().Border(wxALL, 5));
+        pSizerPFMCISpecialisation->AddStretchSpacer(1);
 
 
     // event handlers
@@ -89,7 +96,7 @@ FrameMain::FrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, w
     Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){
         DialogMain DialogMain("DialogMain Title");
         DialogMain.ShowModal();
-    }, ID_BUTTON_OPEN_DIALOGMAIN);
+    }, ID_BUTTON_PFMCI_SPECIALISATION);
 };
 
 // functions

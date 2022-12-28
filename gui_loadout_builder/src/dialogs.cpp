@@ -1,4 +1,6 @@
 #include <dialogs.h>
+    #include <vector>
+    #include <string>
 
 DialogMain::DialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, rTitle, wxDefaultPosition, wxDefaultSize){
     // panels
@@ -10,8 +12,14 @@ DialogMain::DialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, rTi
     pPanelDMButtons = new wxPanel(pPanelDMain);
         pPanelDMButtons->SetBackgroundColour(wxColor(100, 200, 100));
 
+    pPanelDMCSelect = new wxPanel(pPanelDMContents);
+        pPanelDMCSelect->SetBackgroundColour(wxColor(100, 100, 200));
+
+    pPanelDMCFilter = new wxPanel(pPanelDMContents);
+        pPanelDMCFilter->SetBackgroundColour(wxColor(200, 200, 100));
+
     // buttons
-    pButtonOk = new wxButton(pPanelDMButtons, wxID_OK, wxT("Ok"));
+    pButtonPDMBOk = new wxButton(pPanelDMButtons, wxID_OK, wxT("Ok"));
 
     // sizers
     pSizerPDMain = new wxBoxSizer(wxVERTICAL);
@@ -22,8 +30,17 @@ DialogMain::DialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, rTi
     pSizerPDMButtons = new wxBoxSizer(wxHORIZONTAL);
         pPanelDMButtons->SetSizer(pSizerPDMButtons);
         pSizerPDMButtons->AddStretchSpacer(1);
-        pSizerPDMButtons->Add(pButtonOk, wxSizerFlags(0).Expand().Border(wxALL, 5));
+        pSizerPDMButtons->Add(pButtonPDMBOk, wxSizerFlags(0).Expand().Border(wxALL, 5));
     
+    pSizerPDMContents = new wxBoxSizer(wxHORIZONTAL);
+        pPanelDMContents->SetSizer(pSizerPDMContents);
+        pSizerPDMContents->Add(pPanelDMCSelect, wxSizerFlags(1).Expand().Border(wxALL, 5));
+        pSizerPDMContents->Add(pPanelDMCFilter, wxSizerFlags(1).Expand().Border(wxALL, 5));
+
+    //pSizerPDMCSelect = new wxBoxSizer(wxVERTICAL);
+        //pPanelDMCSelect->SetSizer(pSizerPDMCSelect);
+        //pSizerPDMCSelect->AddStretchSpacer(1);
+
     // event handlers
     Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){
         this->Destroy();
