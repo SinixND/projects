@@ -22,6 +22,8 @@ private:
     // buttons
     wxButton *pButtonPDMBOk;
 
+    // combo
+    wxComboBox *pComboBoxPDMCSelect;
     // sizers
     wxSizer *pSizerPDMain;
     wxSizer *pSizerPDMButtons;

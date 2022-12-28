@@ -1,6 +1,7 @@
-#include <dialogs.h>
-    #include <vector>
-    #include <string>
+#include "dialogs.h"
+#include <vector>
+#include <string>
+#include <iostream>
 
 DialogMain::DialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, rTitle, wxDefaultPosition, wxDefaultSize){
     // panels
@@ -20,6 +21,14 @@ DialogMain::DialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, rTi
 
     // buttons
     pButtonPDMBOk = new wxButton(pPanelDMButtons, wxID_OK, wxT("Ok"));
+    
+    // combo
+    std::vector<std::string> list;
+    list.push_back("first");
+    list.push_back("second");
+    list.push_back("third");
+
+    pComboBoxPDMCSelect = new wxComboBox(pPanelDMCSelect, wxID_ANY, wxT("COMBO")/*, wxCB_READONLY*/);
 
     // sizers
     pSizerPDMain = new wxBoxSizer(wxVERTICAL);
