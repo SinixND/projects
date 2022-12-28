@@ -15,9 +15,6 @@ public:
 	FrameMain(const wxString &rTitle);
 
 private:
-	// dialogs
-	DialogMain *pDialogMain;
-
     // menu bar
 	wxMenuBar *pm_menuBar;
 	wxMenu *pm_menuFile;
@@ -47,9 +44,9 @@ private:
 
 // IDs
 enum{
-	ID_BUTTON_OPEN_DIALOGMAIN = wxID_HIGHEST,
-	ID_BUTTON_CLEAR = wxID_HIGHEST,
-	ID_MENU_TEST = wxID_HIGHEST
+	ID_BUTTON_OPEN_DIALOGMAIN,
+	ID_BUTTON_CLEAR,
+	ID_MENU_TEST
 };
 
 #endif //_FRAMES_H_

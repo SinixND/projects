@@ -19,7 +19,6 @@ private:
 
     // buttons
     wxButton *pButtonOk;
-    wxButton *pButtonCancel;
 
     // sizers
     wxSizer *pSizerPDMain;

@@ -11,7 +11,7 @@ DialogMain::DialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, rTi
         pPanelDMButtons->SetBackgroundColour(wxColor(100, 200, 100));
 
     // buttons
-	pButtonCancel = new wxButton(pPanelDMButtons, wxID_CANCEL, wxT("Cancel"));
+    pButtonOk = new wxButton(pPanelDMButtons, wxID_OK, wxT("Ok"));
 
     // sizers
     pSizerPDMain = new wxBoxSizer(wxVERTICAL);
@@ -22,7 +22,7 @@ DialogMain::DialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, rTi
     pSizerPDMButtons = new wxBoxSizer(wxHORIZONTAL);
         pPanelDMButtons->SetSizer(pSizerPDMButtons);
         pSizerPDMButtons->AddStretchSpacer(1);
-        pSizerPDMButtons->Add(pButtonCancel, wxSizerFlags(0).Expand().Border(wxALL, 5));
+        pSizerPDMButtons->Add(pButtonOk, wxSizerFlags(0).Expand().Border(wxALL, 5));
     
     // event handlers
     Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){

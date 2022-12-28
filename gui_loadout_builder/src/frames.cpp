@@ -1,9 +1,6 @@
 #include "frames.h"
 
 FrameMain::FrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, wxDefaultPosition, wxSize(640, 320)){
-    // dialogs
-    pDialogMain = new DialogMain("DialogMain Title");
-
     // menu bar
     pm_menuBar = new wxMenuBar;
     
@@ -87,12 +84,15 @@ FrameMain::FrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, w
         this->Close(true);
     }, wxID_EXIT);
 
+    Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){  }, ID_BUTTON_CLEAR);
+
     Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){
-        pDialogMain->ShowModal();
+        DialogMain DialogMain("DialogMain Title");
+        DialogMain.ShowModal();
     }, ID_BUTTON_OPEN_DIALOGMAIN);
 };
 
 // functions
 void FrameMain::OnMenuTest(wxCommandEvent &event){
     wxLogMessage("Dialog Content");
-};
+}
