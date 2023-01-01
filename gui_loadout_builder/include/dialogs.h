@@ -8,9 +8,6 @@
 #endif //WX_PRECOMP
 
 class DialogMain : public wxDialog{
-public:
-    DialogMain(const wxString &rTitle);
-
 private:
     // panels
     wxPanel *pPanelDMain;
@@ -29,6 +26,9 @@ private:
     wxSizer *pSizerPDMButtons;
     wxSizer *pSizerPDMContents;
     wxSizer *pSizerPDMCSelect;
+
+public:
+    DialogMain(const wxString &rTitle);
 };
 
 // IDs

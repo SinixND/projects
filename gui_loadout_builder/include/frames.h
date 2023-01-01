@@ -10,10 +10,6 @@
 #include "dialogs.h"
 
 class FrameMain : public wxFrame{
-public:
-	// constructor
-	FrameMain(const wxString &rTitle);
-
 private:
     // menu bar
 	wxMenuBar *pm_menuBar;
@@ -42,6 +38,10 @@ private:
 
 	// functions
 	void OnMenuTest(wxCommandEvent &event);
+
+public:
+	// constructor
+	FrameMain(const wxString &rTitle);
 };
 
 // IDs

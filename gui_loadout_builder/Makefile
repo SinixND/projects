@@ -11,7 +11,7 @@ CAT := $(if $(filter $(OS),Windows_NT),type,cat)
 
 SRC_DIR := ./src
 BIN_DIR := ./bin
-INC_DIR := ./include/ /usr/include/wx-3.2/ /usr/lib/wx/include/gtk3-unicode-3.2/
+INC_DIR := ./include/ ~/local_projects/cpp/include /usr/include/wx-3.2/ /usr/lib/wx/include/gtk3-unicode-3.2/
 LIB_DIR := ./lib
 OBJ_DIR := ./build
 DATA_DIR := ./data
