@@ -1,21 +1,34 @@
+#include <string>
 
 class Specialisation {
+private:
+    string mName;
+    string mSigWeapon;
+    string mSigSkill;
+
 public:
-	int Nr;
-	//type of node, either "I" for "Internal" or "R" for "Reservoir"
-	string Type;
+    string  setmName(set arg){
+        string mName = arg;
+    }
+
+    string  setmSigWeapon(set arg){
+        string mSigWeapon = arg;
+    }
+
+    string  setmSigSkill(set arg){
+        string mSigSkill = arg;
+    }
 };
 
 vector<Specialisation> vSpecialisations;
 vector<Specialisation> getSpecialisations() {
 	vSpecialisations.push_back(Specialisation());
-	ifstream fin("Data_Knoten.txt", ios::in);
+	ifstream fin("specialisation.csv", ios::in);
 	if (!fin) {
 		cerr << "Cant open " << endl;
 	}
 	int i = 0;
-	//fill container row by row
-	while (fin >> vSpecialisations[i].Nr >> vSpecialisations[i].Type) {
+	while (fin >> vSpecialisations[i].mName >> vSpecialisations[i].mSigWeapon >> vSpecialisations[i].mSigSkill) {
 		vSpecialisations.push_back(Specialisation());
 		//increase row/node-iterator
 		i += 1;
