@@ -9,7 +9,11 @@
 
 #include "dialogs.h"
 
-class FrameMain : public wxFrame{
+class cFrameMain : public wxFrame{
+public:
+	// constructor
+	cFrameMain(const wxString &rTitle);
+
 private:
     // menu bar
 	wxMenuBar *pm_menuBar;
@@ -29,23 +33,24 @@ private:
 	wxButton *pButtonPFMBClear;
 	wxButton *pButtonPFMCISpecialisation;
 
+	// text ctrls
+	wxStaticText *pStaticTextPFMCSStability;
+
 	// sizers
 	wxSizer *pSizerPFMain;
 	wxSizer *pSizerPFMContents;
 	wxSizer *pSizerPFMButtons;
 	wxSizer *pSizerPFMCItems;
+	wxSizer *pSizerPFMCStats;
 	wxSizer *pSizerPFMCISpecialisation;
 
 	// functions
 	void OnMenuTest(wxCommandEvent &event);
-
-public:
-	// constructor
-	FrameMain(const wxString &rTitle);
 };
 
 // IDs
 enum{
+	ID_STATICTEXT_PFMCSS_STABILITY,
 	ID_BUTTON_PFMCI_SPECIALISATION,
 	ID_BUTTON_CLEAR,
 	ID_MENU_TEST

@@ -1,24 +1,22 @@
+#ifndef _SPECIALISATIONS_DATA_H_ 
+#define _SPECIALISATIONS_DATA_H_
+
 #include <string>
+#include <vector>
 
-class Specialisation {
-private:
-    Specialisation(string &rarg){
-        mName = rarg;
-    };
-
-    string mSpecName;
-    double mSpecBonusStability;
-
+class cSpecialisation{
 public:
-    string  setmName(set &rarg){
-        string mName = arg;
+    std::string setmName(std::string &rArg){
+        std::string mName = rArg;
     }
 
-    string  setmSpecBonusStability(set &rarg){
-        string mName = arg;
+    std::string setmSpecBonusStability(std::string &rArg){
+        std::string setmSpecBonusStability = rArg;
     }
+
+private:
+    std::string mSpecName;
+    std::vector<double> mAttributeBonus;
 };
 
-Specialisation:Sharpshooter{
-
-               }
+#endif //_SPECIALISATIONS_DATA_H_

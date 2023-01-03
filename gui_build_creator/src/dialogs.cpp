@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-DialogMain::DialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, rTitle, wxDefaultPosition, wxDefaultSize){
+cDialogMain::cDialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, rTitle, wxDefaultPosition, wxDefaultSize){
     // panels
     pPanelDMain = new wxPanel(this);
 

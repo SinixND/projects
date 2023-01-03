@@ -1,10 +1,10 @@
 #include "app.h"
 #include "frames.h"
 
-wxIMPLEMENT_APP(App);
+wxIMPLEMENT_APP(cApp);
 
-bool App::OnInit(){
-    FrameMain *pFrameMain = new FrameMain("FrameMain Title");
+bool cApp::OnInit(){
+    cFrameMain *pFrameMain = new cFrameMain("FrameMain Title");
     pFrameMain->Show(); 
 
     return true;

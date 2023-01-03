@@ -7,7 +7,10 @@
     #include <wx/wx.h>
 #endif //WX_PRECOMP
 
-class DialogMain : public wxDialog{
+class cDialogMain : public wxDialog{
+public:
+    cDialogMain(const wxString &rTitle);
+    
 private:
     // panels
     wxPanel *pPanelDMain;
@@ -26,9 +29,6 @@ private:
     wxSizer *pSizerPDMButtons;
     wxSizer *pSizerPDMContents;
     wxSizer *pSizerPDMCSelect;
-
-public:
-    DialogMain(const wxString &rTitle);
 };
 
 // IDs

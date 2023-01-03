@@ -126,7 +126,7 @@ build/src/frames.o: src/frames.cpp include/frames.h \
  /usr/include/wx-3.2/wx/gtk/filedlg.h \
  /usr/include/wx-3.2/wx/gtk/filectrl.h /usr/include/wx-3.2/wx/filectrl.h \
  /usr/include/wx-3.2/wx/mdi.h /usr/include/wx-3.2/wx/gtk/mdi.h \
- include/dialogs.h
+ include/dialogs.h include/player.h
 include/frames.h:
 /usr/include/wx-3.2/wx/wxprec.h:
 /usr/include/wx-3.2/wx/defs.h:
@@ -357,3 +357,4 @@ include/frames.h:
 /usr/include/wx-3.2/wx/mdi.h:
 /usr/include/wx-3.2/wx/gtk/mdi.h:
 include/dialogs.h:
+include/player.h:

@@ -7,7 +7,7 @@
     #include <wx/wx.h>
 #endif //WX_PRECOMP
 
-class App : public wxApp{
+class cApp : public wxApp{
 public:
     virtual bool OnInit();
 };

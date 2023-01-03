@@ -7,5 +7,8 @@
             "binaryArgs": []
         }
     ],
-    "C_Cpp.intelliSenseEngineFallback": "enabled"
+    "C_Cpp.intelliSenseEngineFallback": "enabled",
+    "files.associations": {
+        "string": "cpp"
+    }
 }

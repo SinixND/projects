@@ -1,6 +1,10 @@
-#include "frames.h"
+#include <memory>
 
-FrameMain::FrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, wxDefaultPosition, wxSize(640, 320)){
+#include "frames.h"
+#include "player.h"
+
+
+cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, wxPoint(25, 25), wxSize(400, 225)){
     // menu bar
     pm_menuBar = new wxMenuBar;
     
@@ -48,6 +52,10 @@ FrameMain::FrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, w
 	pButtonPFMBClear = new wxButton(pPanelFMButtons, ID_BUTTON_CLEAR, wxT("Clear"));
     pButtonPFMCISpecialisation = new wxButton(pPanelFMCISpecialisation, ID_BUTTON_PFMCI_SPECIALISATION, wxT("Specialisation"));
 
+    // text ctrls
+    std::unique_ptr<cPlayer> pPlayer(new cPlayer());
+    pStaticTextPFMCSStability = new wxStaticText(pPanelFMCStats, ID_STATICTEXT_PFMCSS_STABILITY, wxT("Stability: " + pPlayer->getmStability()));
+
     // sizers
     pSizerPFMain = new wxBoxSizer(wxVERTICAL);
         pPanelFMain->SetSizer(pSizerPFMain);
@@ -70,9 +78,9 @@ FrameMain::FrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, w
         pSizerPFMCItems->Add(pPanelFMCISpecialisation, wxSizerFlags(0).Expand().Border(wxALL, 5));
         pSizerPFMCItems->AddStretchSpacer(1);
 
-    pSizerPFMCISpecialisation = new wxBoxSizer(wxHORIZONTAL);
+    pSizerPFMCISpecialisation = new wxBoxSizer(wxVERTICAL);
         pPanelFMCISpecialisation->SetSizer(pSizerPFMCISpecialisation);
-        pSizerPFMCISpecialisation->Add(pButtonPFMCISpecialisation, wxSizerFlags(0).Expand().Border(wxALL, 5));
+        pSizerPFMCISpecialisation->Add(pButtonPFMCISpecialisation, wxSizerFlags(1).Expand().Border(wxALL, 5));
         pSizerPFMCISpecialisation->AddStretchSpacer(1);
 
 
@@ -85,7 +93,7 @@ FrameMain::FrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, w
         wxMessageBox("Content", "Frame title", wxOK | wxICON_INFORMATION);
     }, wxID_ABOUT);
 
-    Bind(wxEVT_MENU, &FrameMain::OnMenuTest, this, ID_MENU_TEST); 
+    Bind(wxEVT_MENU, &cFrameMain::OnMenuTest, this, ID_MENU_TEST); 
 
     Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){
         this->Close(true);
@@ -94,12 +102,12 @@ FrameMain::FrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, w
     Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){  }, ID_BUTTON_CLEAR);
 
     Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){
-        DialogMain DialogMain("DialogMain Title");
-        DialogMain.ShowModal();
+        cDialogMain oDialogMain("DialogMain Title");
+        oDialogMain.ShowModal();
     }, ID_BUTTON_PFMCI_SPECIALISATION);
 };
 
 // functions
-void FrameMain::OnMenuTest(wxCommandEvent &event){
+void cFrameMain::OnMenuTest(wxCommandEvent &event){
     wxLogMessage("Dialog Content");
 }

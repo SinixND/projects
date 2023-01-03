@@ -1,6 +1,11 @@
 //#include <string>
 
 //class Specialisation {
+//private:
+    //string mName;
+    //string mSigWeapon;
+    //string mSigSkill;
+
 //public:
     //string  setmName(set arg){
         //string mName = arg;
@@ -13,11 +18,6 @@
     //string  setmSigSkill(set arg){
         //string mSigSkill = arg;
     //}
-
-//private:
-    //string mName;
-    //string mSigWeapon;
-    //string mSigSkill;
 //};
 
 //vector<Specialisation> vSpecialisations;
