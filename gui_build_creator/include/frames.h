@@ -7,8 +7,6 @@
 	#include <wx/wx.h>
 #endif //WX_PRECOMP
 
-#include "dialogs.h"
-
 class cFrameMain : public wxFrame{
 public:
 	// constructor

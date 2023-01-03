@@ -1,4 +1,7 @@
-#include <player.h>
+#include "player.h"
+
+//#include <memory>
+//std::unique_ptr<cPlayer> pPlayer(new cPlayer());
 
 cPlayer::cPlayer(){
     mStability = 1;

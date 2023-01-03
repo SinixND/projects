@@ -1,8 +1,6 @@
-#include <memory>
-
 #include "frames.h"
-#include "player.h"
 
+#include "dialogs.h"
 
 cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, wxPoint(25, 25), wxSize(400, 225)){
     // menu bar
@@ -53,8 +51,7 @@ cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle,
     pButtonPFMCISpecialisation = new wxButton(pPanelFMCISpecialisation, ID_BUTTON_PFMCI_SPECIALISATION, wxT("Specialisation"));
 
     // text ctrls
-    std::unique_ptr<cPlayer> pPlayer(new cPlayer());
-    pStaticTextPFMCSStability = new wxStaticText(pPanelFMCStats, ID_STATICTEXT_PFMCSS_STABILITY, wxT("Stability: " + pPlayer->getmStability()));
+    pStaticTextPFMCSStability = new wxStaticText(pPanelFMCStats, ID_STATICTEXT_PFMCSS_STABILITY, wxT("Stability: " /*+ pPlayer->getmStability()*/));
 
     // sizers
     pSizerPFMain = new wxBoxSizer(wxVERTICAL);
