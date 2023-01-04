@@ -7,9 +7,11 @@
     #include <wx/wx.h>
 #endif //WX_PRECOMP
 
+#include "player.h"
+
 class cDialogMain : public wxDialog{
 public:
-    cDialogMain(const wxString &rTitle);
+    cDialogMain(const wxString &rTitle, cPlayer *pPlayer);
     
 private:
     // panels

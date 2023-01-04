@@ -3,6 +3,7 @@
         {
             "name": "default",
             "includePath": [
+                "/usr/include/wx-3.2/**",
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/**"
             ],

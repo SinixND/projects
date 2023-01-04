@@ -9,6 +9,7 @@
     ],
     "C_Cpp.intelliSenseEngineFallback": "enabled",
     "files.associations": {
-        "string": "cpp"
+        "string": "cpp",
+        "memory": "cpp"
     }
 }

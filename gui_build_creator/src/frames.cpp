@@ -1,8 +1,7 @@
 #include "frames.h"
-
 #include "dialogs.h"
 
-cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle, wxPoint(25, 25), wxSize(400, 225)){
+cFrameMain::cFrameMain(const wxString &rTitle, cPlayer *pPlayer) : wxFrame(NULL, wxID_ANY, rTitle, wxPoint(25, 25), wxSize(400, 225)){
     // menu bar
     pm_menuBar = new wxMenuBar;
     
@@ -39,7 +38,7 @@ cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle,
     pPanelFMCItems = new wxPanel(pPanelFMContents);
         pPanelFMCItems->SetBackgroundColour(wxColor(100, 100, 200));
 
-    pPanelFMCStats = new wxPanel(pPanelFMContents);
+    pPanelFMCStats = new wxScrolledWindow(pPanelFMContents);
         pPanelFMCStats->SetBackgroundColour(wxColor(200, 200, 100));
 
     pPanelFMCISpecialisation = new wxPanel(pPanelFMCItems);
@@ -50,9 +49,13 @@ cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle,
 	pButtonPFMBClear = new wxButton(pPanelFMButtons, ID_BUTTON_CLEAR, wxT("Clear"));
     pButtonPFMCISpecialisation = new wxButton(pPanelFMCISpecialisation, ID_BUTTON_PFMCI_SPECIALISATION, wxT("Specialisation"));
 
-    // text ctrls
-    pStaticTextPFMCSStability = new wxStaticText(pPanelFMCStats, ID_STATICTEXT_PFMCSS_STABILITY, wxT("Stability: " /*+ pPlayer->getmStability()*/));
+    // static texts
+    pStaticTextPFMCSStability = new wxStaticText(pPanelFMCStats, wxID_ANY, wxT("Stability: "));
 
+    // text ctrls
+    pTextCtrlPFMCSStabilityValue = new wxTextCtrl(pPanelFMCStats, ID_TEXTCTRL_PFMCSS_STABILITYVALUE);
+    *pTextCtrlPFMCSStabilityValue << pPlayer->getmStability();
+    
     // sizers
     pSizerPFMain = new wxBoxSizer(wxVERTICAL);
         pPanelFMain->SetSizer(pSizerPFMain);
@@ -74,6 +77,15 @@ cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle,
         pPanelFMCItems->SetSizer(pSizerPFMCItems);
         pSizerPFMCItems->Add(pPanelFMCISpecialisation, wxSizerFlags(0).Expand().Border(wxALL, 5));
         pSizerPFMCItems->AddStretchSpacer(1);
+
+    pSizerPFMCStats = new wxGridSizer(2);
+        pPanelFMCStats->SetSizer(pSizerPFMCStats);
+        pSizerPFMCStats->Add(pStaticTextPFMCSStability, wxSizerFlags().Border(wxALL, 5));
+        pSizerPFMCStats->Add(pTextCtrlPFMCSStabilityValue, wxSizerFlags().Border(wxALL, 5));
+        pSizerPFMCStats->Add(new wxStaticText(pPanelFMCStats, wxID_ANY, "dummy"), wxSizerFlags().Border(wxALL, 5));
+        pSizerPFMCStats->Add(new wxTextCtrl(pPanelFMCStats, wxID_ANY, "dummy"), wxSizerFlags().Border(wxALL, 5));
+        pSizerPFMCStats->Add(new wxStaticText(pPanelFMCStats, wxID_ANY, "dummy"), wxSizerFlags().Border(wxALL, 5));
+        pSizerPFMCStats->Add(new wxTextCtrl(pPanelFMCStats, wxID_ANY, "dummy"), wxSizerFlags().Border(wxALL, 5));
 
     pSizerPFMCISpecialisation = new wxBoxSizer(wxVERTICAL);
         pPanelFMCISpecialisation->SetSizer(pSizerPFMCISpecialisation);
@@ -99,8 +111,9 @@ cFrameMain::cFrameMain(const wxString &rTitle) : wxFrame(NULL, wxID_ANY, rTitle,
     Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){  }, ID_BUTTON_CLEAR);
 
     Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){
-        cDialogMain oDialogMain("DialogMain Title");
+        cDialogMain oDialogMain("DialogMain Title", pPlayer);
         oDialogMain.ShowModal();
+        oDialogMain.Destroy();
     }, ID_BUTTON_PFMCI_SPECIALISATION);
 };
 

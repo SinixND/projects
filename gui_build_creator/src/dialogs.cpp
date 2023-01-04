@@ -1,10 +1,9 @@
 #include "dialogs.h"
 
-#include <vector>
 #include <string>
 #include <iostream>
 
-cDialogMain::cDialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, rTitle, wxDefaultPosition, wxDefaultSize){
+cDialogMain::cDialogMain(const wxString &rTitle, cPlayer *pPlayer) : wxDialog(nullptr, wxID_ANY, rTitle, wxDefaultPosition, wxDefaultSize){
     // panels
     pPanelDMain = new wxPanel(this);
 
@@ -24,12 +23,17 @@ cDialogMain::cDialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, r
     pButtonPDMBOk = new wxButton(pPanelDMButtons, wxID_OK, wxT("Ok"));
     
     // combo
-    std::vector<std::string> list;
-    list.push_back("first");
-    list.push_back("second");
-    list.push_back("third");
-
-    pComboBoxPDMCSelect = new wxComboBox(pPanelDMCSelect, wxID_ANY, wxT("COMBO")/*, wxCB_READONLY*/);
+    //std::vector<std::string> list;
+    //list.push_back("first");
+    wxArrayString list;
+    list.Add("first");
+    list.Add("second");
+    double temp=2.0;
+    //pPlayer->setmStability(temp);
+    //EVT_COMBOBOX(id, func):
+    //Process a wxEVT_COMBOBOX event, when an item on the list is selected. Note that calling GetValue() returns the new value of selection. 
+    pComboBoxPDMCSelect = new wxComboBox(pPanelDMCSelect, wxID_ANY, wxT("COMBO"), wxDefaultPosition, wxDefaultSize, list, wxCB_READONLY | wxCB_SORT);
+    
 
     // sizers
     pSizerPDMain = new wxBoxSizer(wxVERTICAL);
@@ -53,6 +57,6 @@ cDialogMain::cDialogMain(const wxString &rTitle) : wxDialog(nullptr, wxID_ANY, r
 
     // event handlers
     Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){
-        this->Destroy();
+        this->Close(true);
     }, wxID_CANCEL);
 };

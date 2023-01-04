@@ -7,10 +7,13 @@
 	#include <wx/wx.h>
 #endif //WX_PRECOMP
 
+#include "player.h"
+#include <wx/vscroll.h>
+
 class cFrameMain : public wxFrame{
 public:
 	// constructor
-	cFrameMain(const wxString &rTitle);
+	cFrameMain(const wxString &rTitle, cPlayer *pPlayer);
 
 private:
     // menu bar
@@ -23,7 +26,7 @@ private:
 	wxPanel *pPanelFMContents;
 	wxPanel *pPanelFMButtons;
     wxPanel *pPanelFMCItems;
-    wxPanel *pPanelFMCStats;
+    wxScrolledWindow *pPanelFMCStats;
 	wxPanel *pPanelFMCISpecialisation;
 
 	// buttons
@@ -31,8 +34,11 @@ private:
 	wxButton *pButtonPFMBClear;
 	wxButton *pButtonPFMCISpecialisation;
 
-	// text ctrls
+	// static texts
 	wxStaticText *pStaticTextPFMCSStability;
+	
+	// text ctrls
+	wxTextCtrl *pTextCtrlPFMCSStabilityValue;
 
 	// sizers
 	wxSizer *pSizerPFMain;
@@ -48,7 +54,7 @@ private:
 
 // IDs
 enum{
-	ID_STATICTEXT_PFMCSS_STABILITY,
+	ID_TEXTCTRL_PFMCSS_STABILITYVALUE,
 	ID_BUTTON_PFMCI_SPECIALISATION,
 	ID_BUTTON_CLEAR,
 	ID_MENU_TEST
