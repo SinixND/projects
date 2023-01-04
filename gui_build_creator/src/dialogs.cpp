@@ -56,6 +56,7 @@ cDialogMain::cDialogMain(const wxString &rTitle, cPlayer *pPlayer) : wxDialog(nu
         //pSizerPDMCSelect->AddStretchSpacer(1);
 
     // event handlers
+    //wxID_OK tbd!!!
     Bind(wxEVT_COMMAND_BUTTON_CLICKED, [=](wxCommandEvent&){
         this->Close(true);
     }, wxID_CANCEL);
